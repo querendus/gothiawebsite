@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Impressum — Akademische Sängerschaft Gothia zu Graz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #29a520;
+            --primary-dark: #1d7a17;
+            --navy: #002b4c;
+            --gold: #d4af37;
+            --surface: #f4fcec;
+            --on-surface: #171d14;
+            --on-surface-variant: #3e4a3a;
+            --white: #ffffff;
+            --font-headline: 'Newsreader', serif;
+            --font-body: 'Manrope', sans-serif;
+            --radius-lg: 1.25rem;
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+            --transition: 0.28s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--surface);
+            font-family: var(--font-body);
+            color: var(--on-surface);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { color: var(--primary-dark); }
+
+        /* ── Kopfleiste ── */
+        .page-header {
+            position: relative;
+            background: linear-gradient(135deg, rgba(41,165,32,0.95) 0%, rgba(0,43,76,0.97) 70%, rgba(0,20,40,1) 100%);
+            color: var(--white);
+            padding: 1.25rem 1.5rem;
+        }
+        .page-header .bar {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .brand {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 99px;
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .back-link:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.6); }
+        .back-link .material-symbols-outlined { font-size: 1.1rem; }
+
+        /* ── Titelbereich ── */
+        .page-title {
+            max-width: 900px;
+            margin: 3rem auto 1.5rem;
+            padding: 0 1.5rem;
+        }
+        .page-title .eyebrow {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+            margin-bottom: 0.6rem;
+        }
+        .page-title h1 {
+            font-family: var(--font-headline);
+            font-size: clamp(2.2rem, 6vw, 3.2rem);
+            line-height: 1.1;
+            color: var(--navy);
+        }
+        .page-title .title-bar {
+            width: 72px; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        /* ── Inhalt ── */
+        main {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: clamp(1.5rem, 4vw, 3rem);
+        }
+        .lead {
+            font-family: var(--font-headline);
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+        .contact {
+            font-size: 1.02rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .contact a { font-weight: 600; text-decoration: none; }
+        .contact a:hover { text-decoration: underline; }
+        section.block { margin-top: 1.8rem; }
+        section.block h2 {
+            font-family: var(--font-headline);
+            font-size: 1.35rem;
+            color: var(--navy);
+            margin-bottom: 0.4rem;
+        }
+        section.block p { color: var(--on-surface-variant); }
+
+        /* ── Footer ── */
+        footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--primary-dark); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+        footer .legal { margin-top: 0.5rem; display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <div class="bar">
+            <a href="index.html" class="brand">Sängerschaft Gothia</a>
+            <a href="index.html" class="back-link">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Zurück zur Startseite
+            </a>
+        </div>
+    </header>
+
+    <div class="page-title">
+        <span class="eyebrow">Rechtliches</span>
+        <h1>Impressum</h1>
+        <div class="title-bar"></div>
+    </div>
+
+    <main>
+        <div class="card">
+            <p class="lead">Akademische Sängerschaft Gothia zu Graz</p>
+            <p class="contact">
+                Leonhardstraße 27, A-8010 Graz<br>
+                <a href="mailto:info@gothia-graz.at">info@gothia-graz.at</a><br>
+                ZVR: 47 88 0 26 37
+            </p>
+
+            <section class="block">
+                <h2>Offenlegung</h2>
+                <p>Medieninhaber und Herausgeber<br>Akademische Sängerschaft Gothia zu Graz und ihr Altherrenverband</p>
+            </section>
+
+            <section class="block">
+                <h2>Rechtsform</h2>
+                <p>Verein</p>
+            </section>
+
+            <section class="block">
+                <h2>Leitungsmitglieder</h2>
+                <p>Obmann des Altherrenverbands: Engelbert Staller, DI</p>
+            </section>
+
+            <section class="block">
+                <h2>Grundlegende Richtung</h2>
+                <p>Informationen über die Tätigkeiten und das Angebot der Akademischen Sängerschaft Gothia zu Graz, insbesondere auf dem Gebiet der Studentenverbindungen und des Chorgesanges.</p>
+            </section>
+
+            <section class="block">
+                <h2>Haftung</h2>
+                <p>Sämtliche Texte auf dieser Website wurden sorgfältig geprüft. Dessen ungeachtet kann keine Garantie für Richtigkeit, Vollständigkeit und Aktualität der Angaben übernommen werden.</p>
+            </section>
+
+            <section class="block">
+                <h2>Datenschutz</h2>
+                <p>Diese Website verwendet Cookies und davon abgeleitete Techniken, welche ausschließlich der Benutzer-Identifizierung zur Ermöglichung der Service-Funktionen des Programms dienen. Sie sammeln keinerlei Daten über den Benutzer für darüber hinausgehende Zwecke. Ferner wird vom Betreiber des Webservers eine Auswertung des Besucherverkehrs geführt. Diese dient ausschließlich dem Zweck der technischen Wartung und Kontrolle. Diese Daten werden von der Akademischen Sängerschaft Gothia zu Graz, mit Ausnahme von anonymen Statistik-Daten, nicht gespeichert.</p>
+            </section>
+
+            <section class="block">
+                <h2>Copyright</h2>
+                <p>Sämtliche Inhalte dieser Website sind urheberrechtlich geschützt. Eine Verwendung ist nur mit ausdrücklicher Genehmigung des Rechte-Inhabers (Akademische Sängerschaft Gothia zu Graz oder dem beim jeweiligen Inhalt genannten Rechte-Inhaber) zulässig.</p>
+            </section>
+
+            <section class="block">
+                <h2>Links</h2>
+                <p>Links auf diese Website, auf die Startseite ebenso wie auf Seiten in der Tiefe, sind ausdrücklich erwünscht. Eine Übernahme des Hauptfensters in ein Frame-Set des Linksetzers oder andere Formen der Übernahme von Inhalten (Frames, Einbindung mittels server- oder clientseitigen Scripts usw.) ist unzulässig.<br><br>Eigene Links auf fremde Seiten stellen nur Wegweiser zu diesen Seiten dar. Der Herausgeber identifiziert sich nicht mit dem Inhalt der Seiten, auf die verlinkt wird, und übernimmt dafür keinerlei Haftung. Er setzt bewusst auch Links auf Seiten, auf denen andere Meinungen vertreten werden, um dem Besucher eine möglichst große Bandbreite an Meinungen zu bieten. Sollte eine der Seiten, auf die verlinkt wird, rechtswidrige oder sonst bedenkliche Inhalte aufweisen, wird um Mitteilung ersucht. In einem solchen Fall wird der Link sofort gelöscht.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright © 2026 Akademische Sängerschaft Gothia zu Graz.</p>
+        <div class="legal">
+            <a href="index.html">Startseite</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </footer>
+</body>
+</html>

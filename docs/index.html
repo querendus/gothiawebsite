@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Akademische Sängerschaft Gothia zu Graz — Tradition, die klingt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #29a520;
+            --primary-dark: #1d7a17;
+            --primary-light: rgba(41,165,32,0.12);
+            --navy: #002b4c;
+            --gold: #d4af37;
+            --gold-light: rgba(212,175,55,0.2);
+            --surface: #f4fcec;
+            --surface-2: #eef7e4;
+            --on-surface: #171d14;
+            --on-surface-variant: #3e4a3a;
+            --white: #ffffff;
+            --glass: rgba(255,255,255,0.12);
+            --glass-border: rgba(255,255,255,0.22);
+            --font-headline: 'Newsreader', serif;
+            --font-body: 'Manrope', sans-serif;
+            --radius: 0.35rem;
+            --radius-lg: 1.25rem;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-xl: 0 25px 60px rgba(0,0,0,0.18);
+            --transition: 0.28s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--surface);
+            font-family: var(--font-body);
+            color: var(--on-surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,h2,h3,h4,.headline { font-family: var(--font-headline); }
+
+        /* ───────────────────── SCROLL ANIMATIONS ───────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.45s var(--transition), transform 0.45s var(--transition);
+        }
+        .reveal.slide-left  { transform: translateX(-50px); }
+        .reveal.slide-right { transform: translateX(50px); }
+        .reveal.scale-up    { transform: scale(0.92); }
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+        .reveal-delay-1 { transition-delay: 0.06s; }
+        .reveal-delay-2 { transition-delay: 0.12s; }
+        .reveal-delay-3 { transition-delay: 0.18s; }
+        .reveal-delay-4 { transition-delay: 0.24s; }
+        .reveal-delay-5 { transition-delay: 0.30s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+
+        /* ───────────────────── FLOATING DECORATIVE ───────────────────── */
+        .float-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 8s ease-in-out infinite alternate;
+        }
+        @keyframes floatOrb {
+            from { transform: translate(0,0) scale(1); }
+            to   { transform: translate(20px,-30px) scale(1.08); }
+        }
+        .float-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid;
+            pointer-events: none;
+            z-index: 0;
+            animation: spinRing 20s linear infinite;
+        }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+
+        /* ───────────────────── NAV ───────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+            padding: 0.25rem 0;
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 0;
+        }
+        nav.hero-nav { background: transparent; }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-logo {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+            transition: color var(--transition);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+        nav.scrolled .nav-logo { color: var(--navy); }
+
+        .nav-links {
+            display: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            transition: color var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0; right: 0;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+            transform-origin: center;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { transform: scaleX(1); }
+        nav.scrolled .nav-links a { color: #4a5568; }
+        nav.scrolled .nav-links a:hover { color: var(--primary); }
+
+        .btn {
+            padding: 0.6rem 1.6rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.15);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(41,165,32,0.35); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(41,165,32,0.45); }
+        .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.5); color: var(--white); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-2px); }
+        .btn-white { background: var(--white); color: var(--primary); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+        .btn-lg { padding: 1rem 2.2rem; font-size: 1rem; }
+        .btn-gold { background: var(--gold); color: var(--navy); box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.5); }
+
+        /* Hamburger */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            z-index: 200;
+        }
+        @media (min-width: 768px) { .hamburger { display: none; } }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+            transform-origin: center;
+        }
+        nav.scrolled .hamburger span { background: var(--navy); }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,43,76,0.97);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 2.5rem;
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: color 0.3s, opacity 0.4s, transform 0.4s;
+        }
+        .mobile-menu.open a {
+            opacity: 1;
+            transform: none;
+        }
+        .mobile-menu a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu a:hover { color: var(--gold); }
+
+        /* ───────────────────── HERO ───────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.6;
+            transform: scale(1.05);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom {
+            from { transform: scale(1.05); }
+            to   { transform: scale(1.12); }
+        }
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+            rgba(41,165,32,0.62) 0%,
+            rgba(0,43,76,0.68) 60%,
+            rgba(0,20,40,0.8) 100%
+            );
+        }
+        /* Animated gradient overlay */
+        .hero-gradient-anim {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(240deg,
+            rgba(212,175,55,0.08) 0%,
+            transparent 40%,
+            rgba(41,165,32,0.12) 100%
+            );
+            animation: gradientShift 10s ease-in-out infinite alternate;
+        }
+        @keyframes gradientShift {
+            from { opacity: 0.6; filter: hue-rotate(0deg); }
+            to   { opacity: 1;   filter: hue-rotate(15deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            padding-top: 6rem;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeSlideUp 0.55s ease forwards;
+            opacity: 0;
+            animation-delay: 0.1s;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        .hero h1 {
+            font-size: clamp(3.2rem, 9vw, 6.5rem);
+            line-height: 1.0;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            animation: fadeSlideUp 0.55s ease forwards;
+            opacity: 0;
+            animation-delay: 0.22s;
+        }
+        .hero h1 em { font-style: italic; color: var(--gold); }
+        .hero-sub {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            max-width: 38rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.7;
+            animation: fadeSlideUp 0.55s ease forwards;
+            opacity: 0;
+            animation-delay: 0.34s;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 0.55s ease forwards;
+            opacity: 0;
+            animation-delay: 0.46s;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        /* Hero scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fadeSlideUp 0.7s ease forwards;
+            opacity: 0;
+            animation-delay: 0.6s;
+        }
+        .scroll-mouse {
+            width: 24px; height: 38px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-wheel {
+            width: 3px; height: 8px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 2px;
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+        @keyframes scrollWheel {
+            0%,100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(6px); opacity: 0.3; }
+        }
+
+        /* Floating hero decoratives */
+        .hero-orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(41,165,32,0.25) 0%, transparent 70%);
+            top: -100px; right: -100px;
+            animation-duration: 12s;
+        }
+        .hero-orb-2 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
+            bottom: 50px; left: 10%;
+            animation-duration: 9s;
+            animation-direction: alternate-reverse;
+        }
+        .hero-ring {
+            width: 400px; height: 400px;
+            border-color: rgba(255,255,255,0.06);
+            top: 50%; right: 8%;
+            transform: translateY(-50%);
+        }
+        .hero-ring-2 {
+            width: 250px; height: 250px;
+            border-color: rgba(212,175,55,0.1);
+            bottom: 10%; right: 15%;
+        }
+
+        /* ───────────────────── STATS ───────────────────── */
+        .stats-bar {
+            background: var(--navy);
+            padding: 3.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-bar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(41,165,32,0.08), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            from { transform: translateX(-100%); }
+            to   { transform: translateX(100%); }
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        @media (min-width: 640px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+        .stat-item { text-align: center; position: relative; z-index: 1; }
+        .stat-num {
+            font-family: var(--font-headline);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .stat-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.08);
+            display: none;
+        }
+        @media (min-width: 640px) { .stat-divider { display: block; } }
+
+        /* ───────────────────── SECTIONS ───────────────────── */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 7rem 0; }
+
+        .section-eyebrow {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+        .title-bar {
+            width: 5rem;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin-bottom: 2rem;
+        }
+        .title-bar.center { margin: 0 auto 2rem; }
+
+        /* ───────────────────── LEBENSBUND ───────────────────── */
+        #ueber-uns { background: var(--surface); position: relative; overflow: hidden; }
+        .ueber-bg-orb {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(41,165,32,0.05) 0%, transparent 70%);
+            top: -200px; right: -200px;
+            animation-duration: 15s;
+        }
+        .image-stack {
+            position: relative;
+            height: 540px;
+        }
+        .image-stack img {
+            position: absolute;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            transition: transform var(--transition);
+        }
+        .image-stack img:first-child {
+            width: 80%;
+            height: 100%;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+        .image-stack img:last-of-type {
+            width: 55%;
+            height: 55%;
+            bottom: -30px; right: -20px;
+            z-index: 2;
+            border: 4px solid var(--white);
+        }
+        .image-stack:hover img:first-child { transform: scale(1.02) rotate(-0.5deg); }
+        .image-stack:hover img:last-of-type  { transform: scale(1.04) rotate(0.5deg); }
+        /* Einzelnes Bild füllt den ganzen Rahmen (kein Overlay-Stack mehr) */
+        .image-stack img:only-of-type {
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0; right: auto; bottom: auto;
+            z-index: 1;
+            border: none;
+        }
+        .image-stack:hover img:only-of-type { transform: scale(1.02) rotate(-0.5deg); }
+
+        /* Glass badge on image */
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .value-card {
+            padding: 1.5rem;
+            background: var(--surface-2);
+            border-radius: var(--radius-lg);
+            border-left: 3px solid var(--primary);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .value-card h4 {
+            font-family: var(--font-headline);
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+        .value-card p { font-size: 0.875rem; color: var(--on-surface-variant); }
+
+        @media (max-width: 640px) {
+            /* Collage auf dem Handy: linke Spalte stärker zeigen */
+            .hero-bg img { object-position: left center; }
+            .image-stack { height: 320px; }
+            .image-stack img:first-child { width: 100%; }
+            .image-stack img:last-of-type:not(:only-of-type) { display: none; }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ───────────────────── AKTIVITÄTEN ───────────────────── */
+        #aktivitaeten {
+            background: linear-gradient(160deg, #1a3a28 0%, #002b4c 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        #aktivitaeten .section-title { color: var(--white); }
+        #aktivitaeten .section-eyebrow { color: var(--gold); }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 360px 280px;
+            }
+            .bento-wide { grid-column: span 2; }
+        }
+        .bento-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: var(--navy);
+            min-height: 280px;
+            cursor: pointer;
+        }
+        .bento-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.55;
+            transition: transform 0.8s var(--transition), opacity 0.5s;
+            position: absolute;
+            inset: 0;
+        }
+        .bento-card:hover img { transform: scale(1.08); opacity: 0.7; }
+        .bento-overlay {
+            position: absolute;
+            inset: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+            color: var(--white);
+            transition: background var(--transition);
+        }
+        .bento-card:hover .bento-overlay {
+            background: linear-gradient(to top, rgba(0,43,76,0.85) 0%, rgba(0,0,0,0.3) 60%);
+        }
+        .bento-overlay h3 {
+            font-family: var(--font-headline);
+            font-style: italic;
+            margin-bottom: 0.4rem;
+            transform: translateY(8px);
+            transition: transform var(--transition);
+        }
+        .bento-card:hover .bento-overlay h3 { transform: none; }
+        .bento-overlay p {
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s, transform 0.35s;
+            max-width: 30rem;
+        }
+        .bento-card:hover .bento-overlay p { opacity: 1; transform: none; }
+        /* Touch-Geräte (iPhone/iPad): kein Hover — Beschreibungstext dauerhaft zeigen */
+        @media (hover: none) {
+            .bento-overlay p { opacity: 1; transform: none; }
+            .bento-card .bento-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.15) 65%);
+            }
+        }
+        .bento-tag {
+            position: absolute;
+            top: 1.25rem; left: 1.25rem;
+            background: var(--glass);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Bildlose Kacheln (Text auf Farbverlauf) */
+        .bento-card.no-img {
+            background: linear-gradient(150deg, #17472b 0%, var(--navy) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .bento-card.no-img .bento-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 75%);
+        }
+        .bento-card.no-img .bento-overlay h3 { transform: none; }
+        .bento-card.no-img .bento-overlay p { opacity: 1; transform: none; }
+
+        .program-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: background var(--transition), transform var(--transition);
+            min-height: 280px;
+        }
+        .program-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+        .program-card h3 {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        .program-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .program-tag {
+            background: rgba(41,165,32,0.2);
+            color: #7eda70;
+            padding: 0.3rem 0.9rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            border: 1px solid rgba(41,165,32,0.3);
+        }
+
+        .spotify-embed {
+            max-width: 820px;
+            margin: 3rem auto 0;
+        }
+        .spotify-embed h3 {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+
+        /* ───────────────────── ALBEN / AUFNAHMEN ───────────────────── */
+        .albums { max-width: 920px; margin: 4rem auto 0; }
+        .albums h3 {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        @media (max-width: 640px) {
+            .album-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+        }
+        .album-card {
+            display: block;
+            text-decoration: none;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+        .album-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-xl);
+        }
+        .album-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+        }
+        .album-info { padding: 1rem 1.1rem; }
+        .album-info strong {
+            display: block;
+            font-family: var(--font-headline);
+            font-style: italic;
+            color: var(--white);
+            font-size: 1.1rem;
+            line-height: 1.2;
+            margin-bottom: 0.15rem;
+        }
+        .album-info span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+        /* ───────────────────── TERMINE / KALENDER ───────────────────── */
+        #termine { background: var(--surface); }
+        #gothia-calendar {
+            max-width: 920px;
+            margin: 3rem auto 0;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            /* FullCalendar-Theme an Gothia-Farben anpassen */
+            --fc-border-color: rgba(0,0,0,0.08);
+            --fc-button-bg-color: var(--primary);
+            --fc-button-border-color: var(--primary);
+            --fc-button-hover-bg-color: var(--primary-dark);
+            --fc-button-hover-border-color: var(--primary-dark);
+            --fc-button-active-bg-color: var(--primary-dark);
+            --fc-button-active-border-color: var(--primary-dark);
+            --fc-today-bg-color: var(--primary-light);
+            --fc-event-bg-color: var(--primary);
+            --fc-event-border-color: var(--primary);
+            --fc-list-event-hover-bg-color: var(--surface-2);
+            --fc-page-bg-color: var(--white);
+        }
+        #gothia-calendar .fc-toolbar-title {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 1.4rem !important;
+            color: var(--navy);
+        }
+        #gothia-calendar .fc .fc-button {
+            font-weight: 600;
+            text-transform: capitalize;
+            box-shadow: none;
+        }
+        #gothia-calendar .fc-daygrid-day-number,
+        #gothia-calendar .fc-col-header-cell-cushion { color: var(--on-surface); text-decoration: none; }
+        @media (max-width: 640px) {
+            #gothia-calendar { padding: 0.75rem; }
+            #gothia-calendar .fc-toolbar.fc-header-toolbar { flex-direction: column; gap: 0.6rem; }
+            /* Uhrzeiten in der Listenansicht umbrechen, damit sie nicht aus der Zelle ragen */
+            #gothia-calendar .fc-list-event-time {
+                white-space: normal;
+                word-break: break-word;
+                width: 5.5rem;
+                padding-right: 0.5rem;
+            }
+            #gothia-calendar .fc-list-table td { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+        }
+
+        /* ───────────────────── TIMELINE ───────────────────── */
+        #geschichte {
+            background: var(--surface-2);
+            position: relative;
+            overflow: hidden;
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+        @media (max-width: 640px) {
+            .timeline::before { left: 20px; }
+        }
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 2.5rem);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 2.5rem);
+        }
+        @media (max-width: 640px) {
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-right: 0;
+                padding-left: 3.5rem;
+            }
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 1rem;
+            width: 14px; height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--surface-2);
+            box-shadow: 0 0 0 4px rgba(212,175,55,0.2);
+            z-index: 1;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.4);
+            box-shadow: 0 0 0 8px rgba(212,175,55,0.15);
+        }
+        @media (max-width: 640px) {
+            .timeline-dot { left: 20px; }
+            .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.4); }
+        }
+        .timeline-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            max-width: 300px;
+            transition: transform var(--transition), box-shadow var(--transition);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .timeline-item:hover .timeline-card { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .timeline-year {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+        .timeline-title {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-desc { font-size: 0.85rem; color: var(--on-surface-variant); }
+
+        /* ───────────────────── GOTHENHAUS ───────────────────── */
+        #wohnen { position: relative; overflow: hidden; }
+        .haus-grid {
+            display: grid;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (min-width: 900px) {
+            .haus-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .haus-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            position: relative;
+        }
+        .haus-images img {
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            width: 100%;
+            transition: transform var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+        .haus-images img:hover { transform: scale(1.03); }
+        .haus-images img:first-child { height: 280px; grid-row: span 2; }
+        .haus-images img:nth-child(2) { height: 130px; }
+        .haus-images img:last-child { height: 130px; }
+        .haus-glass-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -15px;
+            background: var(--navy);
+            color: var(--white);
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            z-index: 2;
+        }
+        .haus-glass-badge strong {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--gold);
+        }
+        .haus-glass-badge span { font-size: 0.75rem; opacity: 0.7; letter-spacing: 0.05em; }
+
+        .feature-list { list-style: none; margin: 2rem 0; }
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: transform var(--transition);
+        }
+        .feature-list li:hover { transform: translateX(4px); }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-icon {
+            width: 40px; height: 40px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary);
+            transition: background var(--transition), transform var(--transition);
+        }
+        .feature-list li:hover .feature-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1) rotate(5deg);
+        }
+        .feature-text p { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; }
+        .feature-text span { font-size: 0.82rem; color: var(--on-surface-variant); }
+
+        /* ───────────────────── KONTAKT ───────────────────── */
+        #kontakt {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #002b4c 0%, #001a2e 50%, #0d3a1e 100%);
+            color: var(--white);
+        }
+        .kontakt-orb {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(41,165,32,0.15) 0%, transparent 70%);
+            top: -200px; right: -200px;
+            animation-duration: 14s;
+        }
+        .kontakt-orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            bottom: -100px; left: -100px;
+            animation-duration: 10s;
+            animation-direction: alternate-reverse;
+        }
+        #kontakt .section-title { color: var(--white); }
+
+        /* Glassmorphism Form Card */
+        .form-glass {
+            background: rgba(255,255,255,0.07);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            max-width: 820px;
+            margin: 3rem auto 0;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .form-glass::before {
+            content: '';
+            position: absolute;
+            top: 1px; left: 1px; right: 1px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            border-radius: 1.5rem;
+        }
+        .form-row {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 1.25rem;
+        }
+        @media (min-width: 640px) { .form-row { grid-template-columns: 1fr 1fr; } }
+        .form-row.single { grid-template-columns: 1fr; }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+        .form-input {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 0.6rem;
+            padding: 0.85rem 1.1rem;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+            outline: none;
+            width: 100%;
+        }
+        .form-input::placeholder { color: rgba(255,255,255,0.3); }
+        .form-input:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 3px rgba(41,165,32,0.2);
+        }
+        textarea.form-input { resize: vertical; min-height: 120px; }
+        select.form-input { cursor: pointer; }
+        select.form-input option { background: var(--navy); color: var(--white); }
+
+        .form-submit-wrap { text-align: center; margin-top: 2rem; }
+
+        /* ───────────────────── MAP ───────────────────── */
+        .map-section {
+            height: 420px;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-section img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: filter 1s, transform 1s;
+            filter: grayscale(0.8) contrast(1.1);
+            transform: scale(1.02);
+        }
+        .map-section:hover img { filter: grayscale(0); transform: scale(1.04); }
+        /* ───────────────────── FOOTER ───────────────────── */
+        footer {
+            background: #f8fafc;
+            padding: 3rem 2rem 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .footer-top { grid-template-columns: 2fr 1fr 1fr; }
+        }
+        .footer-brand .logo-text {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--navy);
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+        .footer-brand p { font-size: 0.875rem; color: #718096; max-width: 280px; line-height: 1.7; }
+        .footer-col h5 {
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--on-surface);
+            margin-bottom: 1rem;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 0.875rem;
+            color: #718096;
+            text-decoration: none;
+            margin-bottom: 0.6rem;
+            transition: color var(--transition);
+        }
+        .footer-col a:hover { color: var(--primary); }
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (min-width: 640px) {
+            .footer-bottom { flex-direction: row; justify-content: space-between; }
+        }
+        .footer-bottom p { font-size: 0.8rem; color: #a0aec0; }
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { font-size: 0.8rem; color: #a0aec0; text-decoration: none; font-weight: 600; transition: color var(--transition); }
+        .footer-legal a:hover { color: var(--primary); }
+
+        /* ───────────────────── UTILITIES ───────────────────── */
+        .grid { display: grid; gap: 2rem; }
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 2.5rem; }
+        .material-symbols-outlined { vertical-align: middle; font-size: 1.3em; }
+
+        /* ───────────────────── SCROLL TOP BTN ───────────────────── */
+        #scroll-top {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            width: 48px; height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(41,165,32,0.4);
+            z-index: 90;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+        #scroll-top.visible { opacity: 1; transform: none; }
+        #scroll-top:hover { box-shadow: 0 8px 30px rgba(41,165,32,0.5); transform: translateY(-3px); }
+
+        /* ───────────────────── SUCCESS TOAST ───────────────────── */
+        .toast {
+            position: fixed;
+            bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--navy);
+            color: var(--white);
+            padding: 1rem 1.75rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 999;
+            opacity: 0;
+            transition: transform 0.5s var(--transition), opacity 0.5s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: var(--shadow-xl);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast-icon { color: var(--gold); font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#ueber-uns" onclick="closeMobile()">Über uns</a>
+    <a href="#aktivitaeten" onclick="closeMobile()">Aktivitäten</a>
+    <a href="#geschichte" onclick="closeMobile()">Geschichte</a>
+    <a href="#termine" onclick="closeMobile()">Termine</a>
+    <a href="#wohnen" onclick="closeMobile()">Das Gothenhaus</a>
+    <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+</div>
+
+<!-- Navigation -->
+<nav id="mainNav" class="hero-nav">
+    <div class="nav-content">
+        <a href="#" class="nav-logo">Sängerschaft Gothia</a>
+        <div class="nav-links">
+            <a href="#ueber-uns">Über uns</a>
+            <a href="#aktivitaeten">Aktivitäten</a>
+            <a href="#geschichte">Geschichte</a>
+            <a href="#termine">Termine</a>
+            <a href="#wohnen">Das Gothenhaus</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="#kontakt" class="btn btn-primary">Mitglied werden</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menü">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="float-orb hero-orb-1"></div>
+    <div class="float-orb hero-orb-2"></div>
+    <div class="float-ring hero-ring"></div>
+    <div class="float-ring hero-ring-2"></div>
+    <div class="hero-bg">
+        <img alt="Impressionen der Gothia — Stiftungsfest, Kneipe, Grazer Studentenlied und Uhrturm" src="images/hero_collage.jpg"/>
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-gradient-anim"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">Akademische Sängerschaft Gothia zu Graz</div>
+        <h1>Tradition, die klingt —<br/><em>Freundschaft, die bleibt</em></h1>
+        <p class="hero-sub">Alles, was du schon immer über uns wissen wolltest, findest du hier. Gaudeamus igitur!</p>
+        <div class="hero-actions">
+            <a href="#kontakt" class="btn btn-white btn-lg">Jetzt kennenlernen</a>
+            <a href="#aktivitaeten" class="btn btn-outline btn-lg">Unser Chor</a>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <span>Scroll</span>
+    </div>
+</header>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+    <div class="stats-grid">
+        <div class="stat-item reveal">
+            <span class="stat-num" data-target="160" data-suffix="+">0</span>
+            <span class="stat-label">Jahre Geschichte</span>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+            <span class="stat-num" data-target="150" data-suffix="+">0</span>
+            <span class="stat-label">Mitglieder</span>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+            <span class="stat-num" data-target="10">0</span>
+            <span class="stat-label">Aktive</span>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+            <span class="stat-num" data-target="50" data-suffix="+">0</span>
+            <span class="stat-label">Konzerte & Events</span>
+        </div>
+    </div>
+</div>
+
+<!-- Über Uns / Lebensbund -->
+<section id="ueber-uns">
+    <div class="float-orb ueber-bg-orb"></div>
+    <div class="container">
+        <div class="haus-grid" style="gap: 5rem;">
+            <div class="reveal slide-left">
+                <div class="image-stack">
+                    <img alt="Gemeinschaft" src="images/gemeinschaft.png"/>
+                </div>
+            </div>
+            <div class="reveal slide-right">
+                <span class="section-eyebrow">Sängerschaft</span>
+                <h2 class="section-title">Lebenslang verbunden — taktfest seit Generationen</h2>
+                <div class="title-bar"></div>
+                <p style="color: var(--on-surface-variant); font-size: 1.1rem; margin-bottom: 1.25rem; line-height: 1.8;">
+                    Seit <strong>1863</strong> verbindet die Gothia Studenten aus Österreich und Deutschland weit über das Studium hinaus. Werde Teil einer Gemeinschaft, die dir in allen Lebenslagen zur Seite steht und finde Freundschaften fürs Leben!
+                </p>
+                <p style="color: var(--on-surface-variant); font-size: 1.05rem; line-height: 1.8;">
+                    Erfahre aus nächster Nähe das <strong>Lebensbundprinzip</strong>, triff neue Freunde aus unterschiedlichsten Branchen und lege noch heute das Fundament für ein erfülltes Leben. Komm vorbei — sei dabei! Wir freuen uns auf dich!
+                </p>
+                <div class="values-grid">
+                    <div class="value-card reveal reveal-delay-2">
+                        <h4>Prinzip</h4>
+                        <p>Akademische Freiheit und lebenslange Verbundenheit.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-3">
+                        <h4>Glaube</h4>
+                        <p>Werteorientierung im modernen studentischen Alltag.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-4">
+                        <h4>Musik</h4>
+                        <p>Chorgesang als kulturelle und gemeinschaftliche Praxis.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-5">
+                        <h4>Netzwerk</h4>
+                        <p>Verbindung zu Alten Herren in Österreich und Deutschland.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Aktivitäten -->
+<section id="aktivitaeten">
+    <div class="float-orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,0.08) 0%,transparent 70%);top:-150px;right:-100px;animation-duration:16s;"></div>
+    <div class="container">
+        <div class="text-center reveal" style="margin-bottom: 4rem;">
+            <span class="section-eyebrow">Chor</span>
+            <h2 class="section-title" style="color:var(--white);">Vorlesung vorbei — Lied an</h2>
+            <div class="title-bar center"></div>
+            <p style="color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto;font-size:1.05rem;">Hier findet jede Stimme ihren Platz!</p>
+        </div>
+        <div class="bento-grid reveal">
+            <div class="bento-card bento-wide">
+                <img src="images/landesvater.webp" alt="Landesvater" loading="lazy"/>
+                <span class="bento-tag">Herzstück</span>
+                <div class="bento-overlay">
+                    <h3 style="font-size:2.5rem;">Chorgesang</h3>
+                    <p>Unser Chor ist das zentrale Element unserer Sängerschaft. Ob Probe, Konzert oder gesellige Lieder am Gothenhaus — gemeinsam klingt's immer richtig!</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <img src="images/schläger.webp" alt="Schläger" loading="lazy"/>
+                <span class="bento-tag">Tradition</span>
+                <div class="bento-overlay">
+                    <h3 style="font-size:1.7rem;">Kneipen &amp; Kommerse</h3>
+                    <p>Festliche Veranstaltungen, die Tradition und studentische Freude vereinen.</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <img src="images/schild.webp" alt="Wappenschild" loading="lazy"/>
+                <span class="bento-tag">Unterwegs</span>
+                <div class="bento-overlay">
+                    <h3 style="font-size:1.7rem;">Konzertreisen</h3>
+                    <p>Musikalische Botschafter: Unsere Reisen führen uns durch Österreich und Deutschland.</p>
+                </div>
+            </div>
+            <div class="bento-card bento-wide">
+                <img src="images/fuxen.webp" alt="Fuxen" loading="lazy"/>
+                <span class="bento-tag">Nachwuchs</span>
+                <div class="bento-overlay">
+                    <h3 style="font-size:1.7rem;">Fuxenstall</h3>
+                    <p>Bei uns beginnt jede Sängerlaufbahn als Fux: Du wirst herzlich aufgenommen, lernst Lieder und Brauchtum kennen — und findest schnell Anschluss.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bento-grid reveal" style="grid-template-columns:1fr;grid-template-rows:auto;margin-top:1.25rem;">
+            <div class="program-card reveal reveal-delay-2">
+                <h3>Mitsingen? Jederzeit!</h3>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.95rem;line-height:1.7;">„Aber ich kann eigentlich nicht singen“ — keine Sorge! Begeisterung und Freude an der Musik sind alles, was du brauchst, der Rest kommt von ganz allein. Komm einfach vorbei und mach mit: Vorbeischauen — Mitmachen — Begeistert sein!</p>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.95rem;line-height:1.7;margin-top:1rem;">Lieber zuerst reinhören? Auf unserem <a href="https://open.spotify.com/intl-de/artist/5IpsNPWRsuf9EUHvxX5TIH" target="_blank" rel="noopener" style="color:#7eda70;font-weight:700;text-decoration:none;">Spotify-Kanal</a> kannst du unsere Aufnahmen in aller Ruhe genießen — und bald auch deine eigene Stimme.</p>
+                <div class="program-tags">
+                    <span class="program-tag">Probe</span>
+                    <span class="program-tag">Konzert</span>
+                    <span class="program-tag">Lieder am Haus</span>
+                    <span class="program-tag">Spotify</span>
+                </div>
+            </div>
+        </div>
+        <div class="albums reveal reveal-delay-1">
+            <h3>Unsere Aufnahmen</h3>
+            <div class="album-grid">
+                <a class="album-card" href="https://open.spotify.com/intl-de/artist/5IpsNPWRsuf9EUHvxX5TIH" target="_blank" rel="noopener">
+                    <img src="images/Festkonzert150stifti.jpg" alt="150. Stiftungsfest — Festkonzert Teil I" loading="lazy"/>
+                    <div class="album-info">
+                        <strong>150. Stiftungsfest</strong>
+                        <span>Festkonzert Teil I</span>
+                    </div>
+                </a>
+                <a class="album-card" href="https://open.spotify.com/intl-de/artist/5IpsNPWRsuf9EUHvxX5TIH" target="_blank" rel="noopener">
+                    <img src="images/haendel.jpg" alt="G. F. Händel — Dettinger Te Deum" loading="lazy"/>
+                    <div class="album-info">
+                        <strong>Dettinger Te Deum</strong>
+                        <span>G. F. Händel</span>
+                    </div>
+                </a>
+                <a class="album-card" href="https://open.spotify.com/intl-de/artist/5IpsNPWRsuf9EUHvxX5TIH" target="_blank" rel="noopener">
+                    <img src="images/cd.jpg" alt="Gaudeamus in Graz" loading="lazy"/>
+                    <div class="album-info">
+                        <strong>Gaudeamus in Graz</strong>
+                        <span>Akademische Sängerschaft Gothia</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="spotify-embed reveal reveal-delay-1">
+            <h3>Reinhören</h3>
+            <iframe
+                title="Gothia auf Spotify"
+                style="border-radius:12px"
+                src="https://open.spotify.com/embed/artist/5IpsNPWRsuf9EUHvxX5TIH?utm_source=generator&amp;theme=0"
+                width="100%" height="352" frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Termine / Kalender -->
+<section id="termine">
+    <div class="container">
+        <div class="text-center reveal">
+            <span class="section-eyebrow">Semesterprogramm</span>
+            <h2 class="section-title">Termine</h2>
+            <div class="title-bar center"></div>
+            <p style="color:var(--on-surface-variant);max-width:520px;margin:0 auto;font-size:1rem;">Kneipen, Proben, Konzerte und mehr — alle Veranstaltungen des laufenden Semesters auf einen Blick.</p>
+        </div>
+        <div id="gothia-calendar" class="reveal reveal-delay-1"></div>
+        <p id="gothia-calendar-hint" class="text-center" style="color:var(--on-surface-variant);font-size:0.85rem;margin-top:1.25rem;">Noch keine Kalenderquelle hinterlegt.</p>
+        <!-- Termine direkt eingebettet (funktioniert auch beim lokalen Öffnen per Doppelklick).
+             Zum Aktualisieren: neue .ics exportieren und den Inhalt zwischen den Tags ersetzen. -->
+        <script type="application/gothia-ics" id="gothia-ics-data">BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Akademische Sängerschaft Gothia zu Graz - ECPv6.16.5//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Akademische Sängerschaft Gothia zu Graz
+X-ORIGINAL-URL:https://www.gothia-graz.at
+X-WR-CALDESC:Veranstaltungen für Akademische Sängerschaft Gothia zu Graz
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:Europe/Vienna
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:20250330T010000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:20251026T010000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:20260329T010000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:20261025T010000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:20270328T010000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:20271031T010000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:20280326T010000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:20281029T010000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Vienna:20260703T190000
+DTEND;TZID=Europe/Vienna:20260703T233000
+DTSTAMP:20260317T053229Z
+CREATED:20260317T053229Z
+LAST-MODIFIED:20260317T053229Z
+UID:1929-1783105200-1783121400@www.gothia-graz.at
+SUMMARY:Abschlusskneipe
+DESCRIPTION:
+URL:https://www.gothia-graz.at/event/abschlusskneipe/
+LOCATION:Feyertagsstube\, Leonhardstraße 27\, Graz\, 8010
+CATEGORIES:Gothische Veranstaltung,nur für Männer
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260718
+DTEND;VALUE=DATE:20260803
+DTSTAMP:20250809T060640Z
+CREATED:20250809T060640Z
+LAST-MODIFIED:20250809T060640Z
+UID:1754-1784354400-1785650399@www.gothia-graz.at
+SUMMARY:Familienwochen AS! Gothia
+DESCRIPTION:Anmeldung bis 1. Mai 2026 \nAnreise Samstag ab 15:00 Uhr\, Abreise bis 10:00 Uhr am Samstag.
+URL:https://www.gothia-graz.at/event/familienwochen-as-gothia-3/
+LOCATION:Franz-Ludwig-Herzog Heim\, Seestraße 64\, Feld am See\, 9544\, Österreich
+CATEGORIES:Feld am See
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20270731
+DTEND;VALUE=DATE:20270816
+DTSTAMP:20250809T060858Z
+CREATED:20250809T060858Z
+LAST-MODIFIED:20250809T060858Z
+UID:1756-1817013600-1818309599@www.gothia-graz.at
+SUMMARY:Familienwochen AS! Gothia
+DESCRIPTION:Anmeldung bis 1. Mai \nAnreise ab 15:00 Uhr\, Abreise bis 10:00 Uhr
+URL:https://www.gothia-graz.at/event/familienwochen-as-gothia-4/
+LOCATION:Franz-Ludwig-Herzog Heim\, Seestraße 64\, Feld am See\, 9544\, Österreich
+CATEGORIES:Feld am See
+END:VEVENT
+END:VCALENDAR</script>
+    </div>
+</section>
+
+<!-- Das Gothenhaus -->
+<section id="wohnen">
+    <div class="container">
+        <div class="haus-grid">
+            <div class="reveal slide-left" style="position:relative;">
+                <div class="haus-images">
+                    <img alt="Zimmer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZWvgXHN3_dahrA_-5ya4BLh_RcqcApqiPbSEWrHPTfBQihMJGpJTHeLIHjZXdGG9vWAST80SFvTy1IMFviKufQRUm7S3zXZj1DViiS6Rf_KN5n1tepfAzSJpdYDTq2Blx2dzM8Beqgi4IgIYchk8t09URCdn4S1r0qmBU4oCcPgPYODslB5NZ2_b9HfP4Ma6UesJQXY7mruVj0m0cf2P2tqmO8V_SjHJ_L99t4PBox5tM93ZmeXesSyj0kqBlmyPqwB8-YPck1KM6"/>
+                    <img alt="Innenraum" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArJwXVGAHmFCoDiBvQHCrz6FcRXvtqMgVEorAwIUm4xq26eZ7sSa0U39UzGT9n8A5qYUXtRVAfsgDADRWCjmaR_1yXsX5fD3C1zVvCkOviG2yCU9IcsSE_CTMadB2HtHuVAzeSQWsf13gEKYcjefLOC2qZGr7Q1TdYwI-K6ufTsttR7Fc0VC9QFhHCWESWZFtORveDQTnzmSvesq38bXYlU6EhexWag24yu8qutJ27hyI0Ge1YB2qn4BlCfostMCT7H-6G5xiDgEPr"/>
+                    <img alt="Fassade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG7ZEvx9oY9-ZJivQ0kCuV2-r__0vDEYQsukRZuKBliDaxWMbu2ZZrbnUtMLX8a-0pWJOxloA9vQcOCah5CUae9rbg1OYdbIfRWB0_2Gc7EQllZPUb-DnQNS7tzWc9IfV5Rj_62aJO3PotzDZKlopYwJ8OLjS7uPkX6krvCYwU9vMa_sjT63d3NGvdZUBfNLHqXplXTKiYBWLUKBkIeUOoU8jxuWRBlCaM6ZxbRQ2ROvAApRzgADjBueOLOGPVK2Kkrehide6xmCIZ"/>
+                    <div class="haus-glass-badge">
+                        <strong>Leonhardstr.</strong>
+                        <span>Zentral in Graz</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal slide-right">
+                <span class="section-eyebrow">Studentenheim</span>
+                <h2 class="section-title">Wohnen am Gothenhaus — Zwischen Hörsaal und Harmonie</h2>
+                <div class="title-bar"></div>
+                <p style="font-size:1.1rem;color:var(--on-surface-variant);margin-bottom:1.25rem;line-height:1.8;">
+                    Deine Wohnungssuche hat ein Ende! Am Gothenhaus findest du nicht nur eine leistbare Wohnung im Herzen von Graz für dein Studium, sondern sammelst auch Erinnerungen, die dich ein Leben lang begleiten werden.
+                </p>
+                <p style="font-size:1.05rem;color:var(--on-surface-variant);margin-bottom:1.5rem;line-height:1.8;">
+                    Das Haus liegt nur wenige Gehminuten von der Universität Graz entfernt und bietet 5 Wohngemeinschaften auf 3 Stockwerken — mit je 2–4 Zimmern samt den Gemeinschaftsräumen Küche, Bad, WC, Abstellraum, Vorraum sowie einem Balkon. Die Straßenbahnhaltestelle „Lichtenfelsgasse/Kunstuniversität“ (Linien 1, 7 und 17) liegt direkt vor dem Haus.
+                </p>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">location_on</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>Zentrale Lage</p>
+                            <span>Nur wenige Minuten von KF und TU Graz entfernt.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">bed</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>Preiswerte Zimmer</p>
+                            <span>Studentenzimmer in einer inspirierenden Gemeinschaft.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">library_books</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>Bibliothek &amp; Lernräume</p>
+                            <span>Eigene Bibliothek und ruhige Bereiche für optimalen Studienerfolg.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">music_note</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>Probenraum &amp; Gemeinschaftssaal</p>
+                            <span>Eigene Räumlichkeiten für Chor, Veranstaltungen und geselliges Beisammensein.</span>
+                        </div>
+                    </li>
+                </ul>
+                <a href="#kontakt" class="btn btn-primary btn-lg">Dein Platz wartet — komm vorbei!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kontakt -->
+<section id="kontakt">
+    <div class="float-orb kontakt-orb"></div>
+    <div class="float-orb kontakt-orb-2"></div>
+    <div class="container">
+        <div class="text-center reveal">
+            <span class="section-eyebrow" style="color:var(--gold);">Werde Teil von uns</span>
+            <h2 class="section-title">Werde Teil unserer Gemeinschaft</h2>
+            <div class="title-bar center" style="background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+            <p style="font-size:1.15rem;font-weight:300;opacity:0.8;max-width:550px;margin:0 auto;">Du suchst mehr als nur ein Studium? Freundschaft, Musik und Tradition warten auf dich.</p>
+        </div>
+        <div class="form-glass reveal reveal-delay-1">
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="cf-vorname">Vorname</label>
+                        <input id="cf-vorname" class="form-input" type="text" placeholder="Max" autocomplete="given-name"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cf-nachname">Nachname</label>
+                        <input id="cf-nachname" class="form-input" type="text" placeholder="Mustermann" autocomplete="family-name"/>
+                    </div>
+                </div>
+                <div class="form-row single">
+                    <div class="form-group">
+                        <label class="form-label" for="cf-interesse">Was interessiert dich besonders?</label>
+                        <select id="cf-interesse" class="form-input">
+                            <option>Mitgliedschaft &amp; Aktivitas</option>
+                            <option>Wohnen im Gothenhaus</option>
+                            <option>Chorgesang &amp; Musik</option>
+                            <option>Allgemeine Anfrage</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row single">
+                    <div class="form-group">
+                        <label class="form-label" for="cf-nachricht">Deine Nachricht</label>
+                        <textarea id="cf-nachricht" class="form-input" rows="4" placeholder="Erzähl uns ein bisschen über dich…"></textarea>
+                    </div>
+                </div>
+                <div class="form-submit-wrap">
+                    <button type="submit" class="btn btn-gold btn-lg" id="submitBtn">
+                        <span class="material-symbols-outlined" style="font-size:1rem;">send</span>
+                        Anfrage senden
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Map -->
+<div class="map-section">
+    <iframe
+        title="Karte — Gothenhaus, Leonhardstraße 27, 8010 Graz"
+        src="https://www.google.com/maps?q=Leonhardstra%C3%9Fe%2027%2C%208010%20Graz%2C%20%C3%96sterreich&output=embed"
+        style="width:100%;height:100%;border:0;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+</div>
+
+<!-- Timeline / Geschichte -->
+<section id="geschichte">
+    <div class="container">
+        <div class="text-center reveal">
+            <span class="section-eyebrow">Unsere Wurzeln</span>
+            <h2 class="section-title">Geschichte &amp; Tradition</h2>
+            <div class="title-bar center"></div>
+            <p style="color:var(--on-surface-variant);max-width:500px;margin:0 auto;font-size:1rem;">Seit 1863 — geprägt von Freundschaft, Musik und akademischem Geist.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">1862</div>
+                    <div class="timeline-title">Die Idee entsteht</div>
+                    <p class="timeline-desc">In einer Studentenversammlung an der alten Universität Graz wird die Gründung eines Akademischen Gesangvereins beschlossen — aus der Freude am gemeinsamen Singen.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal reveal-delay-1">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">1863</div>
+                    <div class="timeline-title">Offizielle Gründung</div>
+                    <p class="timeline-desc">Am 25. Jänner 1863 genehmigt die k.k. Statthalterei die Statuten des Akademischen Gesangvereins (AGV) — die älteste behördlich genehmigte studentische Gemeinschaft in Graz. Gründungschormeister ist Johann Nepomuk Fuchs.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal reveal-delay-2">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">1913</div>
+                    <div class="timeline-title">Ankauf des Gothenhauses</div>
+                    <p class="timeline-desc">Die Gothia erwirbt ihr eigenes Stammhaus in Graz — seither Mittelpunkt des gemeinsamen Lebens.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal reveal-delay-3">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">1938–1952</div>
+                    <div class="timeline-title">Auflösung &amp; Wiedererstehen</div>
+                    <p class="timeline-desc">1938 wird die Gothia aufgelöst. Nach dem Krieg gelingt 1950 die Rückgewinnung des Gothenhauses, 1952 die Wiederbegründung der Sängerschaft.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal reveal-delay-2">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-title">150. Stiftungsfest</div>
+                    <p class="timeline-desc">Die Gothia feiert ihr 150-jähriges Bestehen — „Gaudeamus igitur – 150 Jahre Akademische Sängerschaft Gothia zu Graz“.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal reveal-delay-3">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">Heute</div>
+                    <div class="timeline-title">Lebendige Gemeinschaft</div>
+                    <p class="timeline-desc">Rund 150 Mitglieder in Österreich und Deutschland — aktiv, vernetzt und stets verwurzelt in der langen Tradition der Gothia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="logo-text">Sängerschaft Gothia</span>
+                <p>Ein Bund fürs Leben — verwurzelt in Geschichte, geleitet von Bruderschaft und Musik seit 1863 in Graz.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigation</h5>
+                <a href="#ueber-uns">Über uns</a>
+                <a href="#aktivitaeten">Aktivitäten</a>
+                <a href="#geschichte">Geschichte</a>
+                <a href="#wohnen">Das Gothenhaus</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+            <div class="footer-col">
+                <h5>Rechtliches</h5>
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2026 Akademische Sängerschaft Gothia zu Graz.</p>
+            <div class="footer-legal">
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nach oben">
+    <span class="material-symbols-outlined" style="font-size:1.2rem;">arrow_upward</span>
+</button>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+    <span class="material-symbols-outlined toast-icon">mail</span>
+    E-Mail-Programm geöffnet – bitte nur noch abschicken.
+</div>
+
+<!-- FullCalendar (Kalenderansicht aus .ics-Feed) -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.15/index.global.min.js"></script>
+
+<script>
+    // ── SCROLL: Nav state + Reveal ──
+    const nav = document.getElementById('mainNav');
+    const scrollTopBtn = document.getElementById('scroll-top');
+    const reveals = document.querySelectorAll('.reveal');
+
+    function onScroll() {
+        const y = window.scrollY;
+        if (y > 80) {
+            nav.classList.remove('hero-nav');
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.add('hero-nav');
+            nav.classList.remove('scrolled');
+        }
+        scrollTopBtn.classList.toggle('visible', y > 500);
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                // Trigger counter if stat
+                const num = e.target.querySelector('[data-target]');
+                if (num) animateCounter(num);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Observe stats directly (they're inside reveals)
+    document.querySelectorAll('[data-target]').forEach(el => {
+        const parent = el.closest('.reveal');
+        if (!parent) {
+            const obs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateCounter(el);
+                    obs.disconnect();
+                }
+            }, {threshold: 0.5});
+            obs.observe(el);
+        }
+    });
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    // ── COUNTER ──
+    function animateCounter(el) {
+        if (el.dataset.animated) return;
+        el.dataset.animated = '1';
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const start = performance.now();
+        function step(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+    }
+
+    // ── MOBILE MENU ──
+    function toggleMobile() {
+        const menu = document.getElementById('mobileMenu');
+        const ham = document.getElementById('hamburger');
+        menu.classList.toggle('open');
+        ham.classList.toggle('open');
+        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMobile() {
+        const menu = document.getElementById('mobileMenu');
+        const ham = document.getElementById('hamburger');
+        menu.classList.remove('open');
+        ham.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ── SMOOTH SCROLL for nav ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        });
+    });
+
+    // ── ACTIVE NAV link ──
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, {rootMargin: '-40% 0px -50% 0px'});
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ── FORM ──
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const val = id => (document.getElementById(id)?.value || '').trim();
+        const vorname   = val('cf-vorname');
+        const nachname  = val('cf-nachname');
+        const interesse = val('cf-interesse');
+        const nachricht = val('cf-nachricht');
+        const name = [vorname, nachname].filter(Boolean).join(' ');
+
+        const subject = 'Anfrage über die Website' + (interesse ? ' – ' + interesse : '');
+        const bodyLines = [
+            'Name: ' + (name || '—'),
+            'Interesse: ' + (interesse || '—'),
+            '',
+            'Nachricht:',
+            nachricht || '—'
+        ];
+        const mailto = 'mailto:info@gothia-graz.at'
+            + '?subject=' + encodeURIComponent(subject)
+            + '&body=' + encodeURIComponent(bodyLines.join('\r\n'));
+
+        // E-Mail-Programm mit vorausgefüllten Daten öffnen
+        window.location.href = mailto;
+
+        // kurze visuelle Rückmeldung
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    });
+
+    // ── PARALLAX Hero ──
+    window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero-bg img');
+        if (hero) {
+            hero.style.transform = `scale(1.05) translateY(${window.scrollY * 0.25}px)`;
+        }
+    }, {passive:true});
+
+    // ── TERMINE: Kalender aus eingebetteten .ics-Daten ──
+    // Optional: externe .ics-URL als Fallback (funktioniert nur über einen Webserver mit CORS,
+    // NICHT beim lokalen Öffnen per Doppelklick). Leer lassen = nur eingebettete Daten nutzen.
+    const GOTHIA_ICS_URL = '';
+
+    (function initGothiaCalendar() {
+        const el = document.getElementById('gothia-calendar');
+        const hint = document.getElementById('gothia-calendar-hint');
+        if (!el || typeof FullCalendar === 'undefined') return;
+
+        // Eingebettete .ics-Daten in FullCalendar-Events umwandeln (via ical.js)
+        function parseInlineEvents() {
+            const node = document.getElementById('gothia-ics-data');
+            if (!node || typeof ICAL === 'undefined') return null;
+            const raw = node.textContent.trim();
+            if (!raw || raw.indexOf('BEGIN:VCALENDAR') === -1) return null;
+            try {
+                const comp = new ICAL.Component(ICAL.parse(raw));
+                return comp.getAllSubcomponents('vevent').map(function (ve) {
+                    const ev = new ICAL.Event(ve);
+                    const allDay = ev.startDate.isDate;
+                    const out = { title: ev.summary || '(ohne Titel)', allDay: allDay };
+                    if (allDay) {
+                        out.start = ev.startDate.toString().slice(0, 10);
+                        if (ev.endDate) out.end = ev.endDate.toString().slice(0, 10);
+                    } else {
+                        out.start = ev.startDate.toJSDate();
+                        if (ev.endDate) out.end = ev.endDate.toJSDate();
+                    }
+                    if (ev.location) out.extendedProps = { location: ev.location };
+                    return out;
+                });
+            } catch (e) {
+                return null;
+            }
+        }
+
+        const inlineEvents = parseInlineEvents();
+        const eventSource = inlineEvents !== null
+            ? inlineEvents
+            : (GOTHIA_ICS_URL ? { url: GOTHIA_ICS_URL, format: 'ics' } : []);
+
+        const calendar = new FullCalendar.Calendar(el, {
+            initialView: 'listMonth',
+            locale: 'de',
+            firstDay: 1,
+            height: 'auto',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,listMonth'
+            },
+            buttonText: { today: 'Heute', month: 'Monat', list: 'Liste' },
+            noEventsContent: 'Aktuell keine Termine in diesem Zeitraum.',
+            events: eventSource,
+            eventDidMount: function (info) {
+                if (hint) hint.style.display = 'none';
+                // Für die Listenansicht: Zeile markieren, um mehrtägige Termine zusammenzufassen
+                var ev = info.event;
+                var row = info.el;
+                row.dataset.gid = ev.id || (ev.title + '|' + (ev.start ? ev.start.getTime() : ''));
+                if (ev.start) row.dataset.gstart = ev.start.toISOString();
+                if (ev.end) row.dataset.gend = ev.end.toISOString();
+                row.dataset.gallday = ev.allDay ? '1' : '0';
+            },
+            viewDidMount: function () { setTimeout(collapseMultiDayList, 0); },
+            datesSet: function () { setTimeout(collapseMultiDayList, 0); }
+        });
+
+        function fmtGermanDate(d) {
+            return d.toLocaleDateString('de-AT', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        // Mehrtägige Termine in der Listenansicht zu EINEM Eintrag zusammenfassen
+        function collapseMultiDayList() {
+            if (!calendar.view || calendar.view.type.indexOf('list') !== 0) return;
+            var seen = {};
+            el.querySelectorAll('.fc-list-event').forEach(function (row) {
+                var gid = row.dataset.gid;
+                if (!gid) return;
+                if (seen[gid]) { row.remove(); return; }   // Duplikat-Tag desselben Termins entfernen
+                seen[gid] = true;
+                var gs = row.dataset.gstart ? new Date(row.dataset.gstart) : null;
+                var ge = row.dataset.gend ? new Date(row.dataset.gend) : null;
+                if (gs && ge) {
+                    var lastDay = new Date(ge);
+                    if (row.dataset.gallday === '1') lastDay.setDate(lastDay.getDate() - 1); // Ende ist exklusiv
+                    if (lastDay > gs && lastDay.toDateString() !== gs.toDateString()) {
+                        var timeCell = row.querySelector('.fc-list-event-time');
+                        if (timeCell) {
+                            timeCell.textContent = 'bis ' + fmtGermanDate(lastDay);
+                            timeCell.style.whiteSpace = 'normal';
+                        }
+                    }
+                }
+            });
+            // leere Tages-Überschriften entfernen
+            el.querySelectorAll('.fc-list-day').forEach(function (dh) {
+                var n = dh.nextElementSibling;
+                if (!n || n.classList.contains('fc-list-day')) dh.remove();
+            });
+        }
+
+        calendar.render();
+
+        if (inlineEvents && inlineEvents.length > 0 && hint) {
+            hint.style.display = 'none';
+        } else if (hint) {
+            hint.textContent = 'Aktuell sind keine Termine eingetragen.';
+        }
+    })();
+</script>
+</body>
+</html>
