@@ -601,6 +601,11 @@
         @media (max-width: 640px) {
             /* Collage auf dem Handy: linke Spalte stärker zeigen */
             .hero-bg img { object-position: left center; }
+            /* Hero-Inhalt oben/unten Luft geben, damit die Buttons nicht am
+               Sektionsrand kleben */
+            .hero-content { padding-top: 7rem; padding-bottom: 5rem; }
+            /* Scroll-Indikator auf dem Handy ausblenden (überlappt sonst die Buttons) */
+            .scroll-indicator { display: none; }
             .image-stack { height: 320px; }
             .image-stack img:first-child { width: 100%; }
             .image-stack img:last-of-type:not(:only-of-type) { display: none; }
@@ -1578,9 +1583,9 @@ END:VCALENDAR</script>
         <div class="haus-grid">
             <div class="reveal slide-left" style="position:relative;">
                 <div class="haus-images">
-                    <img alt="Zimmer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZWvgXHN3_dahrA_-5ya4BLh_RcqcApqiPbSEWrHPTfBQihMJGpJTHeLIHjZXdGG9vWAST80SFvTy1IMFviKufQRUm7S3zXZj1DViiS6Rf_KN5n1tepfAzSJpdYDTq2Blx2dzM8Beqgi4IgIYchk8t09URCdn4S1r0qmBU4oCcPgPYODslB5NZ2_b9HfP4Ma6UesJQXY7mruVj0m0cf2P2tqmO8V_SjHJ_L99t4PBox5tM93ZmeXesSyj0kqBlmyPqwB8-YPck1KM6"/>
-                    <img alt="Innenraum" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArJwXVGAHmFCoDiBvQHCrz6FcRXvtqMgVEorAwIUm4xq26eZ7sSa0U39UzGT9n8A5qYUXtRVAfsgDADRWCjmaR_1yXsX5fD3C1zVvCkOviG2yCU9IcsSE_CTMadB2HtHuVAzeSQWsf13gEKYcjefLOC2qZGr7Q1TdYwI-K6ufTsttR7Fc0VC9QFhHCWESWZFtORveDQTnzmSvesq38bXYlU6EhexWag24yu8qutJ27hyI0Ge1YB2qn4BlCfostMCT7H-6G5xiDgEPr"/>
-                    <img alt="Fassade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG7ZEvx9oY9-ZJivQ0kCuV2-r__0vDEYQsukRZuKBliDaxWMbu2ZZrbnUtMLX8a-0pWJOxloA9vQcOCah5CUae9rbg1OYdbIfRWB0_2Gc7EQllZPUb-DnQNS7tzWc9IfV5Rj_62aJO3PotzDZKlopYwJ8OLjS7uPkX6krvCYwU9vMa_sjT63d3NGvdZUBfNLHqXplXTKiYBWLUKBkIeUOoU8jxuWRBlCaM6ZxbRQ2ROvAApRzgADjBueOLOGPVK2Kkrehide6xmCIZ"/>
+                    <img alt="Zimmer" src="images/zimmer.jpeg" loading="lazy"/>
+                    <img alt="Küche" src="images/kueche.jpeg" loading="lazy"/>
+                    <img alt="Zimmer" src="images/zimmer3.jpeg" loading="lazy"/>
                     <div class="haus-glass-badge">
                         <strong>Leonhardstr.</strong>
                         <span>Zentral in Graz</span>
