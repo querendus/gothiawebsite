@@ -810,10 +810,13 @@
         .album-info span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
 
         /* ───────────────────── TERMINE / KALENDER ───────────────────── */
-        #termine { background: var(--surface); }
+        /* Kompakte Abstände: Termine schließt enger an Geschichte und Gothenhaus an */
+        #termine { background: var(--surface); padding: 3.5rem 0; }
+        #geschichte { padding-bottom: 3.5rem; }
+        #wohnen { padding-top: 3.5rem; }
         #gothia-calendar {
             max-width: 920px;
-            margin: 3rem auto 0;
+            margin: 2rem auto 0;
             background: var(--white);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
@@ -1342,20 +1345,20 @@
                 </p>
                 <div class="values-grid">
                     <div class="value-card reveal reveal-delay-2">
-                        <h4>Prinzip</h4>
-                        <p>Akademische Freiheit und lebenslange Verbundenheit.</p>
+                        <h4>Musik</h4>
+                        <p>Pflege des mehrstimmigen Chorgesangs: Studentenlied, deutsches Volks- und Kunstlied — im offenen Blick auf die Chorliteratur der Welt.</p>
                     </div>
                     <div class="value-card reveal reveal-delay-3">
-                        <h4>Glaube</h4>
-                        <p>Werteorientierung im modernen studentischen Alltag.</p>
+                        <h4>Akademisches Prinzip</h4>
+                        <p>Einander und allen Menschen ohne Hochmut begegnen: im fairen Gespräch, auf fundierter Kenntnis — mit gepflegtem Auftreten.</p>
                     </div>
                     <div class="value-card reveal reveal-delay-4">
-                        <h4>Musik</h4>
-                        <p>Chorgesang als kulturelle und gemeinschaftliche Praxis.</p>
+                        <h4>Fakultative Mensur</h4>
+                        <p>Die Mensur steht jedem Mitglied frei — die Möglichkeit dazu ist gewährleistet, das Pauken wird in Theorie und Praxis erlernt.</p>
                     </div>
                     <div class="value-card reveal reveal-delay-5">
-                        <h4>Netzwerk</h4>
-                        <p>Verbindung zu Alten Herren in Österreich und Deutschland.</p>
+                        <h4>Tradition &amp; Verantwortung</h4>
+                        <p>Bekenntnis zur eigenen Geschichte, den freiheitlich-demokratischen Grundsätzen verpflichtet — und Verantwortung für künftige Generationen.</p>
                     </div>
                 </div>
             </div>
@@ -1599,44 +1602,41 @@ END:VCALENDAR</script>
                 <p style="font-size:1.1rem;color:var(--on-surface-variant);margin-bottom:1.25rem;line-height:1.8;">
                     Deine Wohnungssuche hat ein Ende! Am Gothenhaus findest du nicht nur eine leistbare Wohnung im Herzen von Graz für dein Studium, sondern sammelst auch Erinnerungen, die dich ein Leben lang begleiten werden.
                 </p>
-                <p style="font-size:1.05rem;color:var(--on-surface-variant);margin-bottom:1.5rem;line-height:1.8;">
-                    Das Haus liegt nur wenige Gehminuten von der Universität Graz entfernt und bietet 5 Wohngemeinschaften auf 3 Stockwerken — mit je 2–4 Zimmern samt den Gemeinschaftsräumen Küche, Bad, WC, Abstellraum, Vorraum sowie einem Balkon. Die Straßenbahnhaltestelle „Lichtenfelsgasse/Kunstuniversität“ (Linien 1, 7 und 17) liegt direkt vor dem Haus.
-                </p>
                 <ul class="feature-list">
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">location_on</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">school</span>
                         </div>
                         <div class="feature-text">
-                            <p>Zentrale Lage</p>
-                            <span>Nur wenige Minuten von KF und TU Graz entfernt.</span>
+                            <p>Universitäten</p>
+                            <span>Uni Graz ca. 5 Gehminuten, TU Graz ca. 10 Minuten.</span>
                         </div>
                     </li>
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">bed</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">location_city</span>
                         </div>
                         <div class="feature-text">
-                            <p>Preiswerte Zimmer</p>
-                            <span>Studentenzimmer in einer inspirierenden Gemeinschaft.</span>
+                            <p>Uni-Viertel</p>
+                            <span>Mitten im Grazer Universitätsviertel (Geidorf).</span>
                         </div>
                     </li>
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">library_books</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">train</span>
                         </div>
                         <div class="feature-text">
-                            <p>Bibliothek &amp; Lernräume</p>
-                            <span>Eigene Bibliothek und ruhige Bereiche für optimalen Studienerfolg.</span>
+                            <p>Hauptbahnhof</p>
+                            <span>Ca. 15 Minuten mit der Bim.</span>
                         </div>
                     </li>
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">music_note</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">tram</span>
                         </div>
                         <div class="feature-text">
-                            <p>Probenraum &amp; Gemeinschaftssaal</p>
-                            <span>Eigene Räumlichkeiten für Chor, Veranstaltungen und geselliges Beisammensein.</span>
+                            <p>Bim vor der Tür</p>
+                            <span>Haltestelle „Lichtenfelsgasse/Kunstuniversität“ (Linien 1, 7, 17) direkt vor dem Haus.</span>
                         </div>
                     </li>
                 </ul>
