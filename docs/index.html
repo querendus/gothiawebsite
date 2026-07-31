@@ -290,6 +290,8 @@
             transform: scale(1.05);
             animation: heroZoom 20s ease-in-out infinite alternate;
         }
+        /* Mobil-Variante: halb/halb-Komposition, standardmäßig (Desktop) versteckt */
+        .hero-mobile-split { display: none; position: absolute; inset: 0; }
         @keyframes heroZoom {
             from { transform: scale(1.05); }
             to   { transform: scale(1.12); }
@@ -599,8 +601,10 @@
         .value-card p { font-size: 0.875rem; color: var(--on-surface-variant); }
 
         @media (max-width: 640px) {
-            /* Collage auf dem Handy: linke Spalte stärker zeigen */
-            .hero-bg img { object-position: left center; }
+            /* Auf dem Handy statt der breiten Collage ein halb/halb-Bild zeigen */
+            .hero-collage { display: none; }
+            .hero-mobile-split { display: flex; flex-direction: column; }
+            .hero-mobile-split img { height: 50%; object-position: center; }
             /* Hero-Inhalt oben/unten Luft geben, damit die Buttons nicht am
                Sektionsrand kleben */
             .hero-content { padding-top: 7rem; padding-bottom: 5rem; }
@@ -1282,7 +1286,11 @@
     <div class="float-ring hero-ring"></div>
     <div class="float-ring hero-ring-2"></div>
     <div class="hero-bg">
-        <img alt="Impressionen der Gothia — Stiftungsfest, Kneipe, Grazer Studentenlied und Uhrturm" src="images/hero_collage.jpg"/>
+        <img class="hero-collage" alt="Impressionen der Gothia — Stiftungsfest, Kneipe, Grazer Studentenlied und Uhrturm" src="images/hero_collage.jpg"/>
+        <div class="hero-mobile-split" aria-hidden="true">
+            <img src="images/150_stiftungsfest.jpg" alt="150. Stiftungsfest der Gothia"/>
+            <img src="images/uhrturm-graz.jpg" alt="Grazer Uhrturm"/>
+        </div>
     </div>
     <div class="hero-gradient"></div>
     <div class="hero-gradient-anim"></div>
