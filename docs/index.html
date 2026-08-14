@@ -166,6 +166,17 @@
         .nav-links a.active::after { transform: scaleX(1); }
         nav.scrolled .nav-links a { color: #4a5568; }
         nav.scrolled .nav-links a:hover { color: var(--primary); }
+        /* Buttons in der Navbar: Link-Farbwechsel/-Unterstrich nicht anwenden */
+        .nav-links a.btn { white-space: nowrap; }
+        .nav-links a.btn::after { display: none; }
+        .nav-links a.btn-gold,
+        nav.scrolled .nav-links a.btn-gold { color: var(--navy); }
+        .nav-links a.btn-primary,
+        nav.scrolled .nav-links a.btn-primary { color: var(--white); }
+        .nav-links a.btn-gold:hover,
+        nav.scrolled .nav-links a.btn-gold:hover { color: var(--navy); }
+        .nav-links a.btn-primary:hover,
+        nav.scrolled .nav-links a.btn-primary:hover { color: var(--white); }
 
         .btn {
             padding: 0.6rem 1.6rem;
@@ -214,6 +225,12 @@
             z-index: 200;
         }
         @media (min-width: 768px) { .hamburger { display: none; } }
+
+        /* Persistenter CTA in der Navbar (nur auf Mobil sichtbar,
+           auf Desktop übernimmt der Button in .nav-links) */
+        .nav-mobile-actions { display: flex; align-items: center; gap: 0.6rem; }
+        @media (min-width: 768px) { .nav-cta-mobile { display: none; } }
+        .nav-cta-mobile { padding: 0.5rem 1.1rem; font-size: 0.8rem; white-space: nowrap; }
         .hamburger span {
             display: block;
             width: 24px;
@@ -1257,6 +1274,7 @@
     <a href="#geschichte" onclick="closeMobile()">Geschichte</a>
     <a href="#termine" onclick="closeMobile()">Termine</a>
     <a href="#wohnen" onclick="closeMobile()">Das Gothenhaus</a>
+    <a href="zimmer.html" onclick="closeMobile()">Freie Zimmer</a>
     <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
 </div>
 
@@ -1271,11 +1289,15 @@
             <a href="#termine">Termine</a>
             <a href="#wohnen">Das Gothenhaus</a>
             <a href="#kontakt">Kontakt</a>
+            <a href="zimmer.html" class="btn btn-gold">Freie Zimmer</a>
             <a href="#kontakt" class="btn btn-primary">Mitglied werden</a>
         </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menü">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="nav-mobile-actions">
+            <a href="#kontakt" class="btn btn-primary nav-cta-mobile">Mitglied werden</a>
+            <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -1377,10 +1399,10 @@
             </div>
             <div class="bento-card">
                 <img src="images/schläger.webp" alt="Schläger" loading="lazy"/>
-                <span class="bento-tag">Prinzip</span>
+                <span class="bento-tag">Lebensbund</span>
                 <div class="bento-overlay">
-                    <h3 style="font-size:1.7rem;">Fakultative Mensur</h3>
-                    <p>Die Mensur steht jedem Mitglied frei, die Möglichkeit dazu ist gewährleistet, das Pauken wird in Theorie und Praxis erlernt.</p>
+                    <h3 style="font-size:1.7rem;">Bundesbrüderlichkeit und Freundschaft</h3>
+                    <p>Im Lebensbund stehen Bundesbrüder füreinander ein — über das Studium hinaus und ein Leben lang. Aus gemeinsamen Erlebnissen wachsen Freundschaften, die bleiben.</p>
                 </div>
             </div>
             <div class="bento-card">
@@ -1388,7 +1410,7 @@
                 <span class="bento-tag">Tradition</span>
                 <div class="bento-overlay">
                     <h3 style="font-size:1.7rem;">Tradition &amp; Verantwortung</h3>
-                    <p>Bekenntnis zur eigenen Geschichte, den national freiheitlich Grundsätzen verpflichtet, und Verantwortung für künftige Generationen.</p>
+                    <p>Bekenntnis zur eigenen Geschichte, den nationalliberalen Grundsätzen verpflichtet, und Verantwortung für künftige Generationen.</p>
                 </div>
             </div>
             <div class="bento-card bento-wide">
@@ -1604,11 +1626,29 @@ END:VCALENDAR</script>
                     </li>
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">location_city</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">palette</span>
                         </div>
                         <div class="feature-text">
-                            <p>Uni-Viertel</p>
-                            <span>Mitten im Grazer Universitätsviertel (Geidorf).</span>
+                            <p>Kunstuni in 1 Minute</p>
+                            <span>Die Kunstuniversität liegt praktisch vor der Haustür.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">tram</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>FH Joanneum</p>
+                            <span>Mit dem 1er oder 7er per Bim direkt zur FH Joanneum.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">directions_bike</span>
+                        </div>
+                        <div class="feature-text">
+                            <p>Pädak (PH Steiermark)</p>
+                            <span>Mit dem Rad in 10 Minuten auf die Pädak.</span>
                         </div>
                     </li>
                     <li>
@@ -1622,15 +1662,18 @@ END:VCALENDAR</script>
                     </li>
                     <li>
                         <div class="feature-icon">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">tram</span>
+                            <span class="material-symbols-outlined" style="font-size:1.2rem;">diversity_3</span>
                         </div>
                         <div class="feature-text">
-                            <p>Bim vor der Tür</p>
-                            <span>Haltestelle „Lichtenfelsgasse/Kunstuniversität“ (Linien 1, 7, 17) direkt vor dem Haus.</span>
+                            <p>Freundschaften &amp; Erinnerungen</p>
+                            <span>Mehr als nur Wohnen — Freundschaften und Erinnerungen fürs Leben.</span>
                         </div>
                     </li>
                 </ul>
-                <a href="#kontakt" class="btn btn-primary btn-lg">Dein Platz wartet, kontaktiere uns!</a>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                    <a href="zimmer.html" class="btn btn-primary btn-lg">Freie Zimmer ansehen</a>
+                    <a href="#kontakt" class="btn btn-outline btn-lg" style="border-color:var(--primary);color:var(--primary);">Kontaktiere uns!</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1774,6 +1817,7 @@ END:VCALENDAR</script>
                 <a href="#aktivitaeten">Aktivitäten</a>
                 <a href="#geschichte">Geschichte</a>
                 <a href="#wohnen">Das Gothenhaus</a>
+                <a href="zimmer.html">Freie Zimmer</a>
                 <a href="#kontakt">Kontakt</a>
             </div>
             <div class="footer-col">
@@ -1939,7 +1983,11 @@ END:VCALENDAR</script>
             'Nachricht:',
             nachricht || '—'
         ];
-        const mailto = 'mailto:info@gothia-graz.at'
+        // Anfragen zum Wohnen gehen an die Heimleitung, alles Übrige an die Gothia
+        const recipient = interesse === 'Wohnen im Gothenhaus'
+            ? 'heimleitung@studentenheim-gothenhaus.at'
+            : 'info@gothia-graz.at';
+        const mailto = 'mailto:' + recipient
             + '?subject=' + encodeURIComponent(subject)
             + '&body=' + encodeURIComponent(bodyLines.join('\r\n'));
 
