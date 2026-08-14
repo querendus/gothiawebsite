@@ -21,6 +21,7 @@ Jedes Zimmer sieht so aus:
   "name": "Wien",
   "size": 23,
   "price": 430,
+  "status": "reserviert",
   "balkon": true,
   "hinweis": "",
   "photos": [ ... ]
@@ -30,10 +31,13 @@ Jedes Zimmer sieht so aus:
 | Feld | Bedeutung | Beispiele |
 |------|-----------|-----------|
 | `price` | Miete in Euro pro Monat | `430` &nbsp;·&nbsp; `null` = „auf Anfrage" |
+| `status` | Verfügbarkeit (farbiges Abzeichen + Filter) | `"frei"` (grün) · `"reserviert"` (gold) · `"vergeben"` (grau) · `"belegt"` (grau) · `""` = kein Abzeichen |
 | `balkon` | zeigt den Balkon-Tag an | `true` oder `false` |
-| `hinweis` | kleines Abzeichen auf dem Foto | `"Frei ab Sept. 2026"`, `"Reserviert"`, `"Belegt"` &nbsp;·&nbsp; `""` = kein Abzeichen |
+| `hinweis` | kleiner Zusatztext (rechts oben aufs Foto) | `"ab Sept. 2026"` &nbsp;·&nbsp; `""` = keiner |
 | `size` | Größe in m² | `23` |
 | `photos` | Bildliste (nur bei neuen Fotos ändern) | — |
+
+> `status` schreibst du **klein** (`"frei"`, nicht `"Frei"`). Erlaubt sind genau: `frei`, `reserviert`, `vergeben`, `belegt` oder leer.
 
 ## Wichtig (sonst bricht die Seite)
 

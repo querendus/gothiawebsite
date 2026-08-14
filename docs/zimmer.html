@@ -236,12 +236,26 @@
         .feat-balkon { background: var(--gold-light); color: #7c611b; }
         .feat-teil { background: var(--primary-light); color: var(--primary-dark); }
         .room-hinweis {
-            position: absolute; top: 0.9rem; left: 0.9rem;
+            position: absolute; top: 0.9rem; right: 0.9rem;
             padding: 0.28rem 0.8rem; border-radius: 99px;
             font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
             background: var(--gold); color: var(--navy);
             box-shadow: 0 2px 8px rgba(0,0,0,0.25);
         }
+        .status-badge {
+            position: absolute; top: 0.9rem; left: 0.9rem;
+            padding: 0.28rem 0.8rem; border-radius: 99px;
+            font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        .status-frei { background: var(--primary); }
+        .status-reserviert { background: var(--gold); color: var(--navy); }
+        .status-vergeben { background: #64748b; }
+        .status-belegt { background: #475569; }
+        .dot-frei { background: var(--primary); }
+        .dot-reserviert { background: var(--gold); }
+        .dot-vergeben { background: #64748b; }
+        .dot-belegt { background: #475569; }
         .photo-count {
             position: absolute;
             bottom: 0.9rem; right: 0.9rem;
@@ -530,12 +544,22 @@
 
     // Merkmale je Zimmer: alle teilmöbliert; Balkon laut Feld "balkon" in zimmer.json.
     function featuresOf(r) { return r.balkon ? ['balkon', 'teil'] : ['teil']; }
-    const FEATURES = [
-        { key: 'balkon', label: 'Balkon', dot: 'dot-balkon' },
-        { key: 'teil', label: 'Teilmöbliert', dot: 'dot-teil' }
-    ];
     const FEATURE_LABEL = { balkon: 'Balkon', teil: 'Teilmöbliert' };
     const FEATURE_ICON = { balkon: 'balcony', teil: 'chair' };
+
+    // Verfügbarkeitsstatus (Feld "status" in zimmer.json)
+    const STATUS_LABEL = { frei: 'Frei', reserviert: 'Reserviert', vergeben: 'Vergeben', belegt: 'Belegt' };
+    const STATUS_ORDER = ['frei', 'reserviert', 'vergeben', 'belegt'];
+
+    // Filterleiste: Alle + Status + Balkon
+    const FILTERS = [{ key: 'alle', label: 'Alle Zimmer', dot: null }]
+        .concat(STATUS_ORDER.map(s => ({ key: s, label: STATUS_LABEL[s], dot: 'dot-' + s })))
+        .concat([{ key: 'balkon', label: 'Balkon', dot: 'dot-balkon' }]);
+    function matchesFilter(r, key) {
+        if (key === 'alle') return true;
+        if (key === 'balkon') return !!r.balkon;
+        return r.status === key;
+    }
 
     const grid = document.getElementById('roomsGrid');
     const filterBar = document.getElementById('filterBar');
@@ -545,10 +569,8 @@
 
     function renderFilters() {
         const counts = { alle: ROOMS.length };
-        FEATURES.forEach(f => counts[f.key] = ROOMS.filter(r => featuresOf(r).includes(f.key)).length);
-        const chips = [{ key: 'alle', label: 'Alle Zimmer', dot: null }]
-            .concat(FEATURES.map(f => ({ key: f.key, label: f.label, dot: f.dot })));
-        filterBar.innerHTML = chips.map(c => `
+        FILTERS.forEach(f => { if (f.key !== 'alle') counts[f.key] = ROOMS.filter(r => matchesFilter(r, f.key)).length; });
+        filterBar.innerHTML = FILTERS.map(c => `
             <button class="filter-chip ${c.key === activeFilter ? 'active' : ''}" data-filter="${c.key}">
                 ${c.dot ? `<span class="dot ${c.dot}"></span>` : ''}
                 ${c.label} <span class="count">${counts[c.key] || 0}</span>
@@ -559,14 +581,16 @@
     }
 
     function renderRooms() {
-        const list = activeFilter === 'alle' ? ROOMS : ROOMS.filter(r => featuresOf(r).includes(activeFilter));
+        const list = ROOMS.filter(r => matchesFilter(r, activeFilter));
         grid.innerHTML = list.map((r) => {
             const idx = ROOMS.indexOf(r);
             const hasPhotos = r.photos && r.photos.length > 0;
             const hinweis = r.hinweis ? `<span class="room-hinweis">${esc(r.hinweis)}</span>` : '';
+            const status = r.status ? `<span class="status-badge status-${r.status}">${esc(STATUS_LABEL[r.status] || r.status)}</span>` : '';
             const media = hasPhotos
                 ? `<div class="room-media clickable" data-room="${idx}">
                        <img src="${esc(r.photos[0])}" alt="Zimmer ${esc(r.name)}" loading="lazy"/>
+                       ${status}
                        ${hinweis}
                        ${r.photos.length > 1 ? `<span class="photo-count"><span class="material-symbols-outlined">photo_library</span>${r.photos.length}</span>` : ''}
                    </div>`
@@ -575,6 +599,7 @@
                            <span class="material-symbols-outlined">bed</span>
                            <span class="txt">Kein Foto</span>
                        </div>
+                       ${status}
                        ${hinweis}
                    </div>`;
             const price = r.price != null

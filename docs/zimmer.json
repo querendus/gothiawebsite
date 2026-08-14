@@ -3,15 +3,17 @@
     "info": "Diese Datei steuert die Zimmerliste auf zimmer.html. Auf GitHub bearbeiten, 'Commit changes' klicken – die Seite wird in 1-2 Minuten automatisch aktualisiert.",
     "preis": "Zahl in Euro pro Monat (z. B. 380). null (ohne Anfuehrungszeichen) = 'auf Anfrage'.",
     "balkon": "true = Balkon-Tag wird angezeigt, false = nicht.",
-    "hinweis": "Freier Text als kleines Abzeichen auf dem Foto, z. B. 'Frei ab Sept. 2026', 'Reserviert', 'Belegt'. Leer lassen (\"\") = kein Abzeichen.",
+    "hinweis": "Zusatztext als kleines Abzeichen (z. B. \"ab Sept. 2026\"). Leer lassen (\"\") = kein Abzeichen. Ergaenzt den Status.",
     "photos": "Liste der Bildpfade. Nur aendern, wenn neue Fotos hinzukommen. Reihenfolge = Reihenfolge in der Galerie, erstes Bild = Vorschau.",
-    "achtung": "Gueltiges JSON beibehalten: Texte in \"...\", Eintraege mit Komma trennen, KEIN Komma nach dem letzten Eintrag."
+    "achtung": "Gueltiges JSON beibehalten: Texte in \"...\", Eintraege mit Komma trennen, KEIN Komma nach dem letzten Eintrag.",
+    "status": "Verfügbarkeit: \"frei\", \"reserviert\", \"vergeben\" oder \"belegt\" (steuert Farbe des Badges und den Filter). Leer (\"\") = kein Status-Badge."
   },
   "zimmer": [
     {
       "name": "Marburg",
       "size": 21,
       "price": 380,
+      "status": "vergeben",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -25,6 +27,7 @@
       "name": "Graz",
       "size": 23,
       "price": 410,
+      "status": "vergeben",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -33,19 +36,14 @@
         "images/Fotos_Wohnungen/Fotos_Wohnungen/Zi-Graz_03.jpeg",
         "images/Fotos_Wohnungen/Fotos_Wohnungen/Zi-Graz_04.jpeg",
         "images/Fotos_Wohnungen/Fotos_Wohnungen/Zi-Graz_05.jpeg",
-        "images/Fotos_Wohnungen/Fotos_Wohnungen/Zi-Graz_06.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/421A8447-BDB8-41F3-BE25-CB61E16AAE53.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/7843E0CD-2AD2-4EE0-B966-8C47C6137608.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/99910D44-1CFC-45C8-AD2C-1DCAA7DEAC96.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/EDF5C7F8-192F-455A-B3C7-6FBA7420E966.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/F35036B3-00AF-4527-837B-03557107A9F4.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/F473C8B1-8560-49E2-83FA-1D0A6E988EF2.jpeg"
+        "images/Fotos_Wohnungen/Fotos_Wohnungen/Zi-Graz_06.jpeg"
       ]
     },
     {
       "name": "Leoben",
       "size": 16,
       "price": 300,
+      "status": "frei",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -62,6 +60,7 @@
       "name": "Jena",
       "size": 16,
       "price": 300,
+      "status": "frei",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -72,6 +71,7 @@
       "name": "Halle",
       "size": 16,
       "price": 300,
+      "status": "frei",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -82,16 +82,19 @@
       "name": "Leipzig",
       "size": 24,
       "price": 400,
+      "status": "vergeben",
       "balkon": false,
       "hinweis": "",
       "photos": [
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Wien_jpg Kopie.jpg"
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/rest/77DA209A-A76F-4A9B-B185-692C29C7DA0C.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/rest/7C5EEE97-BB36-4F85-96A0-7EC21963DD50.jpeg"
       ]
     },
     {
       "name": "Klagenfurt",
       "size": 23,
       "price": 430,
+      "status": "reserviert",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -112,6 +115,7 @@
       "name": "Wien",
       "size": 23,
       "price": 430,
+      "status": "reserviert",
       "balkon": true,
       "hinweis": "",
       "photos": [
@@ -128,6 +132,7 @@
       "name": "Linz",
       "size": 16,
       "price": 325,
+      "status": "reserviert",
       "balkon": true,
       "hinweis": "",
       "photos": [
@@ -145,17 +150,23 @@
       "name": "Salzburg",
       "size": 16,
       "price": 325,
+      "status": "reserviert",
       "balkon": true,
       "hinweis": "",
       "photos": [
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/rest/77DA209A-A76F-4A9B-B185-692C29C7DA0C.jpeg",
-        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/rest/7C5EEE97-BB36-4F85-96A0-7EC21963DD50.jpeg"
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/421A8447-BDB8-41F3-BE25-CB61E16AAE53.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/7843E0CD-2AD2-4EE0-B966-8C47C6137608.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/99910D44-1CFC-45C8-AD2C-1DCAA7DEAC96.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/EDF5C7F8-192F-455A-B3C7-6FBA7420E966.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/F35036B3-00AF-4527-837B-03557107A9F4.jpeg",
+        "images/zimmer_zweiter_stock/zimmer_zweiter_stock/Graz/F473C8B1-8560-49E2-83FA-1D0A6E988EF2.jpeg"
       ]
     },
     {
       "name": "Innsbruck",
       "size": 24,
       "price": 450,
+      "status": "belegt",
       "balkon": true,
       "hinweis": "",
       "photos": [
@@ -167,6 +178,7 @@
       "name": "Bozen",
       "size": 16,
       "price": 340,
+      "status": "belegt",
       "balkon": true,
       "hinweis": "",
       "photos": [
@@ -178,6 +190,7 @@
       "name": "Breslau",
       "size": 8,
       "price": null,
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -189,6 +202,7 @@
       "name": "Brünn",
       "size": 19,
       "price": 370,
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -200,6 +214,7 @@
       "name": "Prag",
       "size": 28,
       "price": 440,
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
