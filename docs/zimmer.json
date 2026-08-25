@@ -6,14 +6,14 @@
     "hinweis": "Zusatztext als kleines Abzeichen (z. B. \"ab Sept. 2026\"). Leer lassen (\"\") = kein Abzeichen. Ergaenzt den Status.",
     "photos": "Liste der Bildpfade. Nur aendern, wenn neue Fotos hinzukommen. Reihenfolge = Reihenfolge in der Galerie, erstes Bild = Vorschau.",
     "achtung": "Gueltiges JSON beibehalten: Texte in \"...\", Eintraege mit Komma trennen, KEIN Komma nach dem letzten Eintrag.",
-    "status": "Verfügbarkeit: \"frei\", \"reserviert\", \"vergeben\" oder \"belegt\" (steuert Farbe des Badges und den Filter). Leer (\"\") = kein Status-Badge."
+    "status": "Verfügbarkeit: \"frei\", \"reserviert\", \"gaestezimmer\" oder \"belegt\" (steuert Farbe des Badges und den Filter). Leer (\"\") = kein Status-Badge."
   },
   "zimmer": [
     {
       "name": "Marburg",
       "size": 21,
       "price": 380,
-      "status": "vergeben",
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -27,7 +27,7 @@
       "name": "Graz",
       "size": 23,
       "price": 410,
-      "status": "vergeben",
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -43,7 +43,7 @@
       "name": "Leoben",
       "size": 16,
       "price": 300,
-      "status": "frei",
+      "status": "reserviert",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -60,7 +60,7 @@
       "name": "Jena",
       "size": 16,
       "price": 300,
-      "status": "frei",
+      "status": "reserviert",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -82,7 +82,7 @@
       "name": "Leipzig",
       "size": 24,
       "price": 400,
-      "status": "vergeben",
+      "status": "belegt",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -94,7 +94,7 @@
       "name": "Klagenfurt",
       "size": 23,
       "price": 430,
-      "status": "reserviert",
+      "status": "frei",
       "balkon": false,
       "hinweis": "",
       "photos": [
@@ -190,7 +190,7 @@
       "name": "Breslau",
       "size": 8,
       "price": null,
-      "status": "belegt",
+      "status": "gaestezimmer",
       "balkon": false,
       "hinweis": "",
       "photos": [

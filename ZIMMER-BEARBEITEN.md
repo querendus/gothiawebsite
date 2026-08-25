@@ -31,13 +31,13 @@ Jedes Zimmer sieht so aus:
 | Feld | Bedeutung | Beispiele |
 |------|-----------|-----------|
 | `price` | Miete in Euro pro Monat | `430` &nbsp;·&nbsp; `null` = „auf Anfrage" |
-| `status` | Verfügbarkeit (farbiges Abzeichen + Filter) | `"frei"` (grün) · `"reserviert"` (gold) · `"vergeben"` (grau) · `"belegt"` (grau) · `""` = kein Abzeichen |
+| `status` | Verfügbarkeit (farbiges Abzeichen + Filter) | `"frei"` (grün) · `"reserviert"` (gold) · `"gaestezimmer"` (blau) · `"belegt"` (grau) · `""` = kein Abzeichen |
 | `balkon` | zeigt den Balkon-Tag an | `true` oder `false` |
 | `hinweis` | kleiner Zusatztext (rechts oben aufs Foto) | `"ab Sept. 2026"` &nbsp;·&nbsp; `""` = keiner |
 | `size` | Größe in m² | `23` |
 | `photos` | Bildliste (nur bei neuen Fotos ändern) | — |
 
-> `status` schreibst du **klein** (`"frei"`, nicht `"Frei"`). Erlaubt sind genau: `frei`, `reserviert`, `vergeben`, `belegt` oder leer.
+> `status` schreibst du **klein** (`"frei"`, nicht `"Frei"`). Erlaubt sind genau: `frei`, `reserviert`, `gaestezimmer`, `belegt` oder leer.
 
 ## Wichtig (sonst bricht die Seite)
 

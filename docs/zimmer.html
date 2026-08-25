@@ -250,11 +250,11 @@
         }
         .status-frei { background: var(--primary); }
         .status-reserviert { background: var(--gold); color: var(--navy); }
-        .status-vergeben { background: #64748b; }
+        .status-gaestezimmer { background: var(--navy); }
         .status-belegt { background: #475569; }
         .dot-frei { background: var(--primary); }
         .dot-reserviert { background: var(--gold); }
-        .dot-vergeben { background: #64748b; }
+        .dot-gaestezimmer { background: var(--navy); }
         .dot-belegt { background: #475569; }
         .photo-count {
             position: absolute;
@@ -548,8 +548,8 @@
     const FEATURE_ICON = { balkon: 'balcony', teil: 'chair' };
 
     // Verfügbarkeitsstatus (Feld "status" in zimmer.json)
-    const STATUS_LABEL = { frei: 'Frei', reserviert: 'Reserviert', vergeben: 'Vergeben', belegt: 'Belegt' };
-    const STATUS_ORDER = ['frei', 'reserviert', 'vergeben', 'belegt'];
+    const STATUS_LABEL = { frei: 'Frei', reserviert: 'Reserviert', gaestezimmer: 'Gästezimmer', belegt: 'Belegt' };
+    const STATUS_ORDER = ['frei', 'reserviert', 'gaestezimmer', 'belegt'];
 
     // Filterleiste: Alle + Status + Balkon
     const FILTERS = [{ key: 'alle', label: 'Alle Zimmer', dot: null }]
