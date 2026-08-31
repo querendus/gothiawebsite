@@ -3,14 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDHNXVECH4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TDHNXVECH4');
-    </script>
+    <!-- Cookie-Consent + Google Analytics (lädt erst nach Zustimmung) -->
+    <script src="consent.js" defer></script>
     <title>Impressum — Akademische Sängerschaft Gothia zu Graz</title>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -233,6 +227,8 @@
         <div class="legal">
             <a href="index.html">Startseite</a>
             <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="#" onclick="gothiaCookieSettings();return false;">Cookie-Einstellungen</a>
         </div>
     </footer>
 </body>

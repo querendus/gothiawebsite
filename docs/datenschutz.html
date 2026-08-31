@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <!-- Cookie-Consent + Google Analytics (lädt erst nach Zustimmung) -->
+    <script src="consent.js" defer></script>
+    <title>Datenschutzerklärung — Akademische Sängerschaft Gothia zu Graz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #29a520;
+            --primary-dark: #1d7a17;
+            --navy: #002b4c;
+            --gold: #d4af37;
+            --surface: #f4fcec;
+            --on-surface: #171d14;
+            --on-surface-variant: #3e4a3a;
+            --white: #ffffff;
+            --font-headline: 'Newsreader', serif;
+            --font-body: 'Manrope', sans-serif;
+            --radius-lg: 1.25rem;
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+            --transition: 0.28s cubic-bezier(0.23,1,0.32,1);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--surface);
+            font-family: var(--font-body);
+            color: var(--on-surface);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { color: var(--primary-dark); }
+
+        .page-header {
+            position: relative;
+            background: linear-gradient(135deg, rgba(41,165,32,0.95) 0%, rgba(0,43,76,0.97) 70%, rgba(0,20,40,1) 100%);
+            color: var(--white);
+            padding: 1.25rem 1.5rem;
+        }
+        .page-header .bar {
+            max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        .brand {
+            font-family: var(--font-headline); font-style: italic; font-weight: 700;
+            font-size: 1.4rem; color: var(--white); text-decoration: none;
+        }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.3); border-radius: 99px;
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .back-link:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.6); }
+        .back-link .material-symbols-outlined { font-size: 1.1rem; }
+
+        .page-title { max-width: 900px; margin: 3rem auto 1.5rem; padding: 0 1.5rem; }
+        .page-title .eyebrow {
+            display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--primary-dark); margin-bottom: 0.6rem;
+        }
+        .page-title h1 {
+            font-family: var(--font-headline); font-size: clamp(2.2rem, 6vw, 3.2rem);
+            line-height: 1.1; color: var(--navy);
+        }
+        .page-title .title-bar {
+            width: 72px; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 4px; margin-top: 1rem;
+        }
+
+        main { max-width: 900px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+        .card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+            padding: clamp(1.5rem, 4vw, 3rem);
+        }
+        .lead { font-family: var(--font-headline); font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
+        .intro { color: var(--on-surface-variant); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.08); }
+        section.block { margin-top: 1.9rem; }
+        section.block h2 { font-family: var(--font-headline); font-size: 1.35rem; color: var(--navy); margin-bottom: 0.5rem; }
+        section.block p { color: var(--on-surface-variant); margin-bottom: 0.6rem; }
+        section.block ul { color: var(--on-surface-variant); margin: 0.3rem 0 0.6rem 1.25rem; }
+        section.block li { margin-bottom: 0.3rem; }
+        .addr { font-weight: 600; color: var(--navy); }
+        .btn-settings {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--navy); color: var(--white); border: none; cursor: pointer;
+            font-family: inherit; font-weight: 700; font-size: 0.9rem;
+            padding: 0.6rem 1.2rem; border-radius: 99px; margin-top: 0.5rem;
+            transition: background var(--transition), transform var(--transition);
+        }
+        .btn-settings:hover { background: #013a66; transform: translateY(-1px); }
+
+        footer {
+            background: #f8fafc; border-top: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem; text-align: center; color: #64748b; font-size: 0.85rem;
+        }
+        footer a { color: var(--primary-dark); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+        footer .legal { margin-top: 0.5rem; display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+        footer .legal button {
+            background: none; border: none; cursor: pointer; color: var(--primary-dark);
+            font-weight: 600; font-size: 0.85rem; font-family: inherit; padding: 0;
+        }
+        footer .legal button:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <div class="bar">
+            <a href="index.html" class="brand">Sängerschaft Gothia</a>
+            <a href="index.html" class="back-link">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Zurück zur Startseite
+            </a>
+        </div>
+    </header>
+
+    <div class="page-title">
+        <span class="eyebrow">Rechtliches</span>
+        <h1>Datenschutzerklärung</h1>
+        <div class="title-bar"></div>
+    </div>
+
+    <main>
+        <div class="card">
+            <p class="lead">Datenschutz auf einen Blick</p>
+            <p class="intro">Der Schutz deiner personenbezogenen Daten ist uns wichtig. Nachfolgend informieren wir dich darüber, welche Daten beim Besuch dieser Website verarbeitet werden und welche Rechte du hast. Statistik-Dienste (Google Analytics) werden ausschließlich nach deiner <strong>ausdrücklichen Einwilligung</strong> geladen.</p>
+
+            <section class="block">
+                <h2>1. Verantwortlicher</h2>
+                <p class="addr">Akademische Sängerschaft Gothia zu Graz</p>
+                <p>Leonhardstraße 27, A-8010 Graz<br>
+                E-Mail: <a href="mailto:info@gothia-graz.at">info@gothia-graz.at</a><br>
+                ZVR: 47 88 0 26 37</p>
+            </section>
+
+            <section class="block">
+                <h2>2. Hosting &amp; Server-Logfiles</h2>
+                <p>Diese Website wird bei der <span class="addr">World4You Internet Services GmbH</span>, Hafenstraße 35, 4020 Linz, Österreich, gehostet. Beim Aufruf der Seiten werden vom Server automatisch Zugriffsdaten in sogenannten Logfiles verarbeitet:</p>
+                <ul>
+                    <li>IP-Adresse des anfragenden Geräts</li>
+                    <li>Datum und Uhrzeit des Zugriffs</li>
+                    <li>aufgerufene Seite/Datei, Referrer</li>
+                    <li>verwendeter Browser und Betriebssystem</li>
+                </ul>
+                <p>Diese Verarbeitung dient der technischen Auslieferung, Stabilität und Sicherheit der Website. Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO). Die Logfiles werden nur für die technische Wartung und Kontrolle ausgewertet und nicht mit anderen Daten zusammengeführt.</p>
+            </section>
+
+            <section class="block">
+                <h2>3. Cookies &amp; Einwilligung</h2>
+                <p>Für den reinen Betrieb der Website setzen wir keine Tracking-Cookies. Statistik-Cookies (Google Analytics) werden <strong>erst gesetzt, nachdem du im Cookie-Hinweis auf „Akzeptieren" geklickt hast</strong>. Wählst du „Nur notwendige", wird Google Analytics nicht geladen.</p>
+                <p>Deine Auswahl wird lokal in deinem Browser (localStorage) gespeichert, damit der Hinweis nicht bei jedem Besuch erneut erscheint. Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen oder ändern:</p>
+                <button type="button" class="btn-settings" onclick="gothiaCookieSettings();return false;">
+                    <span class="material-symbols-outlined" style="font-size:1.1rem;">cookie</span>
+                    Cookie-Einstellungen öffnen
+                </button>
+                <p style="margin-top:0.8rem;">Rechtsgrundlage für einwilligungspflichtige Cookies ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
+            </section>
+
+            <section class="block">
+                <h2>4. Google Analytics</h2>
+                <p>Nach deiner Einwilligung nutzen wir Google Analytics 4, einen Webanalysedienst der <span class="addr">Google Ireland Limited</span>, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet Cookies (u. a. <em>_ga</em>, <em>_ga_&lt;ID&gt;</em>), die eine Analyse der Nutzung der Website ermöglichen.</p>
+                <p><strong>Zweck:</strong> Reichweitenmessung und Verständnis, wie unsere Seite genutzt wird (z. B. welche Zimmer/Seiten aufgerufen werden), um das Angebot zu verbessern.</p>
+                <p><strong>Datenübermittlung:</strong> Dabei können Daten an die Google LLC in den USA übermittelt werden. Google stützt sich hierbei auf das EU-US Data Privacy Framework sowie auf Standardvertragsklauseln.</p>
+                <p><strong>Widerruf:</strong> über die <button type="button" class="btn-settings" style="padding:0.35rem 0.9rem;font-size:0.82rem;margin:0;" onclick="gothiaCookieSettings();return false;">Cookie-Einstellungen</button>, durch Löschen der Cookies im Browser oder mit dem <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google-Analytics-Deaktivierungs-Add-on</a>.</p>
+                <p>Rechtsgrundlage: deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Weitere Informationen in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
+            </section>
+
+            <section class="block">
+                <h2>5. Schriftarten (Google Fonts &amp; Material Symbols)</h2>
+                <p>Zur einheitlichen Darstellung werden Schriftarten von Google-Servern (fonts.googleapis.com, fonts.gstatic.com) geladen. Dabei wird deine IP-Adresse an Google übermittelt. Rechtsgrundlage ist unser berechtigtes Interesse an einer ansprechenden Darstellung (Art. 6 Abs. 1 lit. f DSGVO).</p>
+            </section>
+
+            <section class="block">
+                <h2>6. Eingebundene Dienste Dritter</h2>
+                <p>Auf der Startseite binden wir Inhalte Dritter ein. Beim Laden dieser Inhalte werden Daten (u. a. deine IP-Adresse) an die jeweiligen Anbieter übertragen:</p>
+                <ul>
+                    <li><strong>Google Maps</strong> (Kartenanzeige) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutz Google</a></li>
+                    <li><strong>Spotify</strong> (Musik-Player) — <a href="https://www.spotify.com/at/legal/privacy-policy/" target="_blank" rel="noopener">Datenschutz Spotify</a></li>
+                    <li><strong>jsDelivr</strong> (CDN für die Kalenderdarstellung)</li>
+                </ul>
+            </section>
+
+            <section class="block">
+                <h2>7. Kontaktaufnahme</h2>
+                <p>Über das Kontaktformular wird deine Anfrage in deinem E-Mail-Programm vorbereitet und per E-Mail an uns gesendet. Die von dir übermittelten Angaben verarbeiten wir ausschließlich zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO).</p>
+            </section>
+
+            <section class="block">
+                <h2>8. Deine Rechte</h2>
+                <p>Dir stehen gegenüber uns folgende Rechte hinsichtlich deiner personenbezogenen Daten zu: Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch gegen die Verarbeitung, Datenübertragbarkeit sowie der Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft.</p>
+                <p>Wende dich dazu an <a href="mailto:info@gothia-graz.at">info@gothia-graz.at</a>. Außerdem hast du ein Beschwerderecht bei der Aufsichtsbehörde:<br>
+                <span class="addr">Österreichische Datenschutzbehörde</span>, Barichgasse 40–42, 1030 Wien, <a href="mailto:dsb@dsb.gv.at">dsb@dsb.gv.at</a>.</p>
+            </section>
+
+            <section class="block">
+                <h2>Stand</h2>
+                <p>August 2026</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright © 2026 Akademische Sängerschaft Gothia zu Graz.</p>
+        <div class="legal">
+            <a href="index.html">Startseite</a>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <button type="button" onclick="gothiaCookieSettings();return false;">Cookie-Einstellungen</button>
+        </div>
+    </footer>
+</body>
+</html>
