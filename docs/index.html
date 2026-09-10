@@ -6,8 +6,7 @@
     <!-- Cookie-Consent + Google Analytics (lädt erst nach Zustimmung) -->
     <script src="consent.js" defer></script>
     <title>Akademische Sängerschaft Gothia zu Graz — Tradition, die klingt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="fonts.css" rel="stylesheet"/>
     <style>
         :root {
             --primary: #29a520;
@@ -1150,6 +1149,21 @@
             transform: scale(1.02);
         }
         .map-section:hover img { filter: grayscale(0); transform: scale(1.04); }
+
+        /* ── Klick-zum-Laden (Maps/Spotify) ── */
+        .embed-gate { position: relative; width: 100%; height: 100%; }
+        .embed-gate iframe { display: block; }
+        .embed-ph {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; gap: 0.85rem; padding: 2rem; height: 100%; min-height: 300px;
+            background: linear-gradient(160deg, #1a3a28 0%, #002b4c 100%);
+            color: rgba(255,255,255,0.9);
+        }
+        .embed-ph .material-symbols-outlined { font-size: 2.6rem; color: var(--gold); }
+        .embed-ph p { font-size: 0.92rem; max-width: 30rem; color: rgba(255,255,255,0.82); line-height: 1.6; margin: 0; }
+        .embed-ph small { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+        .embed-ph small a { color: var(--gold); }
+
         /* ───────────────────── FOOTER ───────────────────── */
         footer {
             background: #f8fafc;
@@ -1465,13 +1479,23 @@
         </div>
         <div class="spotify-embed reveal reveal-delay-1">
             <h3>Reinhören</h3>
-            <iframe
-                title="Gothia auf Spotify"
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/artist/5IpsNPWRsuf9EUHvxX5TIH?utm_source=generator&amp;theme=0"
-                width="100%" height="352" frameborder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"></iframe>
+            <div class="embed-gate" id="spotifyGate">
+                <div class="embed-ph" style="border-radius:12px;min-height:352px;">
+                    <span class="material-symbols-outlined">music_note</span>
+                    <p><strong>Spotify-Player</strong><br>Zum Abspielen unserer Aufnahmen. Beim Laden werden Daten an Spotify übertragen.</p>
+                    <button type="button" class="btn btn-gold" onclick="loadEmbed('spotifyGate')">Player laden</button>
+                    <small>Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a></small>
+                </div>
+                <template>
+                    <iframe
+                        title="Gothia auf Spotify"
+                        style="border-radius:12px"
+                        src="https://open.spotify.com/embed/artist/5IpsNPWRsuf9EUHvxX5TIH?utm_source=generator&amp;theme=0"
+                        width="100%" height="352" frameborder="0"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                </template>
+            </div>
         </div>
     </div>
 </section>
@@ -1734,13 +1758,23 @@ END:VCALENDAR</script>
 
 <!-- Map -->
 <div class="map-section">
-    <iframe
-        title="Karte — Gothenhaus, Leonhardstraße 27, 8010 Graz"
-        src="https://www.google.com/maps?q=Leonhardstra%C3%9Fe%2027%2C%208010%20Graz%2C%20%C3%96sterreich&output=embed"
-        style="width:100%;height:100%;border:0;"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
+    <div class="embed-gate" id="mapGate">
+        <div class="embed-ph">
+            <span class="material-symbols-outlined">map</span>
+            <p><strong>Google Maps</strong><br>Zeigt die Lage des Gothenhauses (Leonhardstraße 27, 8010 Graz). Beim Laden werden Daten an Google übertragen.</p>
+            <button type="button" class="btn btn-gold" onclick="loadEmbed('mapGate')">Karte laden</button>
+            <small><a href="https://www.google.com/maps?q=Leonhardstra%C3%9Fe%2027%2C%208010%20Graz%2C%20%C3%96sterreich" target="_blank" rel="noopener">In Google Maps öffnen</a> · <a href="datenschutz.html">Datenschutz</a></small>
+        </div>
+        <template>
+            <iframe
+                title="Karte — Gothenhaus, Leonhardstraße 27, 8010 Graz"
+                src="https://www.google.com/maps?q=Leonhardstra%C3%9Fe%2027%2C%208010%20Graz%2C%20%C3%96sterreich&output=embed"
+                style="width:100%;height:100%;border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+        </template>
+    </div>
 </div>
 
 <!-- Timeline / Geschichte -->
@@ -1861,6 +1895,16 @@ END:VCALENDAR</script>
         var y = document.getElementById('copyright-year');
         if (y) y.textContent = new Date().getFullYear();
     })();
+
+    // ── KLICK-ZUM-LADEN: Maps/Spotify erst nach aktivem Klick laden ──
+    function loadEmbed(id) {
+        var gate = document.getElementById(id);
+        if (!gate) return;
+        var tpl = gate.querySelector('template');
+        var ph = gate.querySelector('.embed-ph');
+        if (tpl) gate.appendChild(tpl.content.cloneNode(true));
+        if (ph) ph.remove();
+    }
 
     // ── SCROLL: Nav state + Reveal ──
     const nav = document.getElementById('mainNav');
