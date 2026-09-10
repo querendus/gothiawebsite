@@ -66,10 +66,11 @@
         el.setAttribute('role', 'dialog');
         el.setAttribute('aria-label', 'Cookie-Hinweis');
         el.innerHTML =
-            '<strong>Cookies &amp; Statistik</strong>' +
-            '<p>Wir nutzen <b>Google Analytics</b>, um zu verstehen, wie unsere Seite genutzt wird — ' +
-            'aber nur mit deiner Zustimmung. Notwendige Funktionen kommen ohne Cookies aus. ' +
-            'Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
+            '<strong>Cookies &amp; eingebettete Inhalte</strong>' +
+            '<p>Wir nutzen <b>Google Analytics</b> (Statistik) sowie eingebettete Inhalte von ' +
+            '<b>Google Maps</b> und <b>Spotify</b> — nur mit deiner Zustimmung. Mit „Akzeptieren" ' +
+            'werden diese geladen; andernfalls kannst du sie später einzeln per Klick laden. ' +
+            'Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
             '<div class="btns">' +
             '<button type="button" class="reject">Nur notwendige</button>' +
             '<button type="button" class="accept">Akzeptieren</button>' +
@@ -93,8 +94,14 @@
         if (banner) banner.classList.remove('show');
     }
 
-    function accept() { saveChoice('granted'); hideBanner(); loadGA(); }
-    function reject() { saveChoice('denied'); hideBanner(); }
+    /* Andere Skripte (z. B. Maps/Spotify auf der Startseite) über die Auswahl informieren */
+    function notify(choice) {
+        window.gothiaConsent = choice;
+        try { document.dispatchEvent(new CustomEvent('gothia-consent', { detail: choice })); } catch (e) {}
+    }
+
+    function accept() { saveChoice('granted'); hideBanner(); loadGA(); notify('granted'); }
+    function reject() { saveChoice('denied'); hideBanner(); notify('denied'); }
 
     /* Öffentlich: Banner erneut öffnen (Auswahl ändern / Einwilligung widerrufen) */
     window.gothiaCookieSettings = function () {
@@ -106,6 +113,7 @@
         var c = readChoice();
         if (c === 'granted') loadGA();
         else if (c !== 'denied') showBanner();   // nur zeigen, wenn noch nicht entschieden
+        notify(c);   // Startseite über bestehende Auswahl informieren
     }
 
     if (document.readyState === 'loading') {

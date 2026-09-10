@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <!-- Cookie-Consent + Google Analytics (lädt erst nach Zustimmung) -->
-    <script src="consent.js" defer></script>
+    <script src="consent.js?v=2" defer></script>
     <title>Akademische Sängerschaft Gothia zu Graz — Tradition, die klingt</title>
     <link href="fonts.css" rel="stylesheet"/>
     <style>
@@ -1896,15 +1896,27 @@ END:VCALENDAR</script>
         if (y) y.textContent = new Date().getFullYear();
     })();
 
-    // ── KLICK-ZUM-LADEN: Maps/Spotify erst nach aktivem Klick laden ──
-    function loadEmbed(id) {
-        var gate = document.getElementById(id);
-        if (!gate) return;
+    // ── Maps/Spotify: erst nach Cookie-Zustimmung ODER einzelnem Klick laden ──
+    function fillEmbed(gate) {
         var tpl = gate.querySelector('template');
         var ph = gate.querySelector('.embed-ph');
-        if (tpl) gate.appendChild(tpl.content.cloneNode(true));
-        if (ph) ph.remove();
+        if (!tpl || !ph) return;   // schon geladen
+        gate.appendChild(tpl.content.cloneNode(true));
+        ph.remove();
     }
+    function loadEmbed(id) {              // einzelner Klick auf „laden"
+        var gate = document.getElementById(id);
+        if (gate) fillEmbed(gate);
+    }
+    function autoLoadEmbeds() {           // nach Zustimmung alle laden
+        document.querySelectorAll('.embed-gate').forEach(fillEmbed);
+    }
+    // Bereits erteilte Zustimmung -> sofort laden (kein Platzhalter-Flackern)
+    try { if (localStorage.getItem('gothia-consent') === 'granted') autoLoadEmbeds(); } catch (e) {}
+    // Zustimmung während des Besuchs erteilt -> laden
+    document.addEventListener('gothia-consent', function (e) {
+        if (e.detail === 'granted') autoLoadEmbeds();
+    });
 
     // ── SCROLL: Nav state + Reveal ──
     const nav = document.getElementById('mainNav');
