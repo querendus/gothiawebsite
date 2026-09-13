@@ -2100,10 +2100,11 @@ END:VCALENDAR</script>
         }
     }, {passive:true});
 
-    // ── TERMINE: Kalender aus eingebetteten .ics-Daten ──
-    // Optional: externe .ics-URL als Fallback (funktioniert nur über einen Webserver mit CORS,
-    // NICHT beim lokalen Öffnen per Doppelklick). Leer lassen = nur eingebettete Daten nutzen.
-    const GOTHIA_ICS_URL = '';
+    // ── TERMINE: Google-Kalender „Veranstaltungen AS! Gothia" über Server-Proxy ──
+    // calendar.php holt den Google-Kalender serverseitig (löst CORS + Datenschutz)
+    // und liefert ihn von der eigenen Domain. Leer lassen ('') = stattdessen die
+    // unten eingebetteten .ics-Daten verwenden.
+    const GOTHIA_ICS_URL = 'calendar.php';
 
     (function initGothiaCalendar() {
         const el = document.getElementById('gothia-calendar');
@@ -2138,9 +2139,9 @@ END:VCALENDAR</script>
         }
 
         const inlineEvents = parseInlineEvents();
-        const eventSource = inlineEvents !== null
-            ? inlineEvents
-            : (GOTHIA_ICS_URL ? { url: GOTHIA_ICS_URL, format: 'ics' } : []);
+        const eventSource = GOTHIA_ICS_URL
+            ? { url: GOTHIA_ICS_URL, format: 'ics' }
+            : (inlineEvents !== null ? inlineEvents : []);
 
         const calendar = new FullCalendar.Calendar(el, {
             initialView: 'listMonth',
@@ -2205,7 +2206,9 @@ END:VCALENDAR</script>
 
         calendar.render();
 
-        if (inlineEvents && inlineEvents.length > 0 && hint) {
+        if (GOTHIA_ICS_URL) {
+            if (hint) hint.style.display = 'none';   // Live-Quelle: FullCalendar zeigt selbst „keine Termine"
+        } else if (inlineEvents && inlineEvents.length > 0 && hint) {
             hint.style.display = 'none';
         } else if (hint) {
             hint.textContent = 'Aktuell sind keine Termine eingetragen.';

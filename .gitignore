@@ -1,3 +1,5 @@
 .claude/
 .DS_Store
 *.zip
+docs/calendar-cache.ics
+docs/calendar-test.ics
