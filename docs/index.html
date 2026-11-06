@@ -897,11 +897,26 @@
             font-size: 1.4rem !important;
             color: var(--navy);
         }
-        #gothia-calendar .fc .fc-button {
+        /* Toolbar-Buttons: dezente Pillen, aktive Ansicht grün */
+        #gothia-calendar .fc-button {
             font-weight: 600;
             text-transform: capitalize;
-            box-shadow: none;
+            box-shadow: none !important;
+            background: var(--white);
+            border: 1.5px solid rgba(0,0,0,0.1);
+            color: var(--navy);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            transition: background .2s, color .2s, border-color .2s;
         }
+        #gothia-calendar .fc-button:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); background: var(--white); }
+        #gothia-calendar .fc-button:disabled { opacity: 0.45; }
+        #gothia-calendar .fc-prev-button, #gothia-calendar .fc-next-button { width: 2.4rem; padding: 0.4rem 0; }
+        #gothia-calendar .fc-button-group { gap: 0.4rem; }
+        #gothia-calendar .fc-button-group > .fc-button { border-radius: 999px !important; margin: 0 !important; }
+        #gothia-calendar .fc-today-button { margin-left: 0.4rem; }
+        #gothia-calendar .fc-button-active,
+        #gothia-calendar .fc-button-active:hover:not(:disabled) { background: var(--primary); border-color: var(--primary); color: var(--white); }
         #gothia-calendar .fc-daygrid-day-number,
         #gothia-calendar .fc-col-header-cell-cushion { color: var(--on-surface); text-decoration: none; }
         @media (max-width: 640px) {
@@ -914,7 +929,80 @@
                 width: 5.5rem;
                 padding-right: 0.5rem;
             }
-            #gothia-calendar .fc-list-table td { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+        }
+        /* Monatsansicht: Titel umbrechen statt abschneiden, heutiger Tag als Kreis */
+        #gothia-calendar .fc-col-header-cell-cushion {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+            color: var(--on-surface-variant) !important; padding: 0.5rem 0;
+        }
+        #gothia-calendar .fc-daygrid-day-number { font-size: 0.85rem; padding: 0.35rem 0.5rem; }
+        #gothia-calendar .fc-day-other .fc-daygrid-day-number { opacity: 0.4; }
+        #gothia-calendar .fc-day-today { background: none !important; }
+        #gothia-calendar .fc-day-today .fc-daygrid-day-number {
+            background: var(--primary); color: var(--white) !important;
+            border-radius: 999px; min-width: 1.7rem; text-align: center; margin: 0.2rem;
+            padding: 0.15rem 0.4rem;
+        }
+        #gothia-calendar .fc-daygrid-event {
+            white-space: normal;
+            border-radius: 6px;
+            padding: 2px 5px;
+            margin: 1px 3px 3px !important;
+            font-size: 0.75rem;
+            line-height: 1.25;
+        }
+        #gothia-calendar .fc-daygrid-event .fc-event-title { white-space: normal; overflow-wrap: break-word; hyphens: auto; font-weight: 600; }
+        @media (max-width: 640px) {
+            #gothia-calendar .fc-daygrid-event { font-size: 0.62rem; padding: 1px 3px; margin: 1px 1px 2px !important; }
+            /* Mobil: Titel einzeilig abschneiden, sonst werden die Zellen riesig */
+            #gothia-calendar .fc-daygrid-event,
+            #gothia-calendar .fc-daygrid-event .fc-event-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        }
+        /* Listenansicht als moderne Terminliste: Datums-Kachel links, Titel + Zeit/Ort rechts */
+        #gothia-calendar .fc-list { border: none; }
+        #gothia-calendar .fc-list-table, #gothia-calendar .fc-list-table tbody { display: block; }
+        #gothia-calendar .fc-list-table thead, #gothia-calendar .fc-list-day,
+        #gothia-calendar .fc-list-event-graphic { display: none; }
+        #gothia-calendar .fc-list-event {
+            display: grid;
+            grid-template-columns: 4rem 1fr;
+            grid-template-areas: "b t" "b m";
+            column-gap: 1rem;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.6rem;
+            border: 1px solid rgba(0,0,0,0.07);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            transition: box-shadow .2s, transform .2s;
+        }
+        #gothia-calendar .fc-list-event:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        #gothia-calendar .fc-list-event:hover td { background: none; }
+        #gothia-calendar .fc-list-event td { border: none; padding: 0; background: none; }
+        #gothia-calendar .gc-date {
+            grid-area: b;
+            display: flex; flex-direction: column; align-items: center;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background: var(--primary-light);
+            line-height: 1.1;
+        }
+        #gothia-calendar .gc-date .m {
+            width: 100%; text-align: center;
+            background: var(--primary); color: var(--white);
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+            padding: 0.2rem 0;
+        }
+        #gothia-calendar .gc-date .d { font-size: 1.5rem; font-weight: 700; color: var(--navy); padding-top: 0.2rem; }
+        #gothia-calendar .gc-date .w { font-size: 0.7rem; color: var(--on-surface-variant); padding-bottom: 0.3rem; }
+        #gothia-calendar .fc-list-event-title { grid-area: t; font-weight: 600; font-size: 1.02rem; }
+        #gothia-calendar .fc-list-event-title a { color: var(--navy); text-decoration: none; }
+        #gothia-calendar .fc-list-event-time {
+            grid-area: m;
+            width: auto !important;
+            white-space: normal !important;
+            font-size: 0.85rem;
+            color: var(--on-surface-variant);
         }
 
         /* ───────────────────── TIMELINE ───────────────────── */
@@ -2161,6 +2249,9 @@ END:VCALENDAR</script>
                 right: 'dayGridMonth,listMonth'
             },
             buttonText: { today: 'Heute', month: 'Monat', list: 'Liste' },
+            // Monatsansicht: farbige Balken ohne Uhrzeit, damit der Titel Platz hat
+            eventDisplay: 'block',
+            views: { dayGridMonth: { displayEventTime: false } },
             noEventsContent: 'Aktuell keine Termine in diesem Zeitraum.',
             events: eventSource,
             eventDidMount: function (info) {
@@ -2172,6 +2263,8 @@ END:VCALENDAR</script>
                 if (ev.start) row.dataset.gstart = ev.start.toISOString();
                 if (ev.end) row.dataset.gend = ev.end.toISOString();
                 row.dataset.gallday = ev.allDay ? '1' : '0';
+                if (ev.extendedProps && ev.extendedProps.location) row.dataset.gloc = ev.extendedProps.location;
+                if (info.view.type.indexOf('list') === 0) setTimeout(collapseMultiDayList, 0);
             },
             viewDidMount: function () { setTimeout(collapseMultiDayList, 0); },
             datesSet: function () { setTimeout(collapseMultiDayList, 0); }
@@ -2197,11 +2290,20 @@ END:VCALENDAR</script>
                     if (row.dataset.gallday === '1') lastDay.setDate(lastDay.getDate() - 1); // Ende ist exklusiv
                     if (lastDay > gs && lastDay.toDateString() !== gs.toDateString()) {
                         var timeCell = row.querySelector('.fc-list-event-time');
-                        if (timeCell) {
-                            timeCell.textContent = 'bis ' + fmtGermanDate(lastDay);
-                            timeCell.style.whiteSpace = 'normal';
-                        }
+                        if (timeCell) timeCell.textContent = 'bis ' + fmtGermanDate(lastDay);
                     }
+                }
+
+                if (gs && !row.querySelector('.gc-date')) {
+                    var badge = document.createElement('td');
+                    badge.className = 'gc-date';
+                    badge.innerHTML = '<span class="m"></span><span class="d"></span><span class="w"></span>';
+                    badge.children[0].textContent = gs.toLocaleDateString('de-AT', { month: 'short' }).replace('.', '');
+                    badge.children[1].textContent = gs.getDate();
+                    badge.children[2].textContent = gs.toLocaleDateString('de-AT', { weekday: 'short' }).replace('.', '');
+                    row.prepend(badge);
+                    var tc = row.querySelector('.fc-list-event-time');
+                    if (tc && row.dataset.gloc) tc.textContent += ' · ' + row.dataset.gloc;
                 }
             });
             // leere Tages-Überschriften entfernen
