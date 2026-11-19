@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Alte WordPress-Kalender-Abos (The Events Calendar, ?ical=1) -> neuer Kalender-Proxy
+RewriteCond %{QUERY_STRING} (^|&)ical=1(&|$)
+RewriteRule ^events(/|$) calendar.php [L,QSD]
+
+# Restliche alte Event-Seiten -> Termine auf der Startseite
+RewriteRule ^events(/|$) /#termine [R=301,L,NE,QSD]
